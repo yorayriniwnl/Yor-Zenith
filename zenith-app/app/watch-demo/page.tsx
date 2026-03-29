@@ -56,19 +56,10 @@ export default function WatchDemoPage() {
         </section>
 
         <section className="rounded-[1.5rem] border border-emerald-500/30 bg-[#05080d]/90 overflow-hidden shadow-[0_22px_48px_rgba(0,0,0,0.45)] mb-6">
-          <div className="px-4 md:px-6 py-3 border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+          <div className="px-4 md:px-6 py-3 border-b border-white/10 flex flex-wrap items-center gap-3">
             <div className="text-[11px] tracking-[0.28em] uppercase text-emerald-400 font-bold">
               Live Demo Feed
             </div>
-
-            <a
-              href={YOUTUBE_WATCH_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="text-[11px] tracking-[0.18em] uppercase text-white border border-white/20 rounded-full px-4 py-2 bg-white/5 hover:bg-white/10 transition"
-            >
-              Open on YouTube
-            </a>
           </div>
 
           <div className="relative aspect-video bg-black">
