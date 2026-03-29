@@ -994,7 +994,7 @@ export default function SolarDecisionOverview() {
           }}
         >
           <Link
-            href="/watch-demo"
+            href="/demo"
             style={{
               fontSize: "11px",
               letterSpacing: "2px",
