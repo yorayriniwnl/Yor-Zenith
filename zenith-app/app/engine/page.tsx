@@ -2,6 +2,7 @@
 
 import { useRef, useState, useCallback, useMemo, Suspense } from "react";
 import type { ComponentProps } from "react";
+import Link from "next/link";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   PerspectiveCamera,
@@ -982,6 +983,34 @@ export default function SolarDecisionOverview() {
           From feasibility scoring to subsidy optimization - everything required
           to deploy rooftop solar intelligently.
         </p>
+        <div
+          style={{
+            marginTop: "22px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            flexWrap: "wrap",
+          }}
+        >
+          <Link
+            href="/watch-demo"
+            style={{
+              fontSize: "11px",
+              letterSpacing: "2px",
+              color: "#050505",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              fontWeight: 700,
+              border: "1px solid #ff6e00",
+              borderRadius: "999px",
+              padding: "10px 16px",
+              background: "#ff6e00",
+            }}
+          >
+            Watch Demo
+          </Link>
+        </div>
         <div
           style={{
             width: "48px",
