@@ -70,9 +70,9 @@ const MODULES: ModuleConfig[] = [
     desc: "Analyzes rooftop size, solar irradiance, electricity usage, ROI, payback period, and lifetime savings to compute a viability score.",
     angle: Math.PI * 1.92,
     orbitRadius: 3.1,
-    color: "#ff6e00",
-    colorHex: 0xff6e00,
-    emissiveHex: 0xff3300,
+    color: "#34d399",
+    colorHex: 0x34d399,
+    emissiveHex: 0x059669,
     cardIcon: "layers",
     cardDesc: `1. The user uploads their electricity bill or enters monthly usage details.
 2. Zenith analyzes consumption patterns using AI-assisted parsing.
@@ -283,8 +283,8 @@ function SolarSphere({ isAnyHovered }: { isAnyHovered: boolean }) {
       <mesh ref={meshRef}>
         <sphereGeometry args={[0.95, 48, 48]} />
         <meshStandardMaterial
-          color="#ff7a00"
-          emissive="#ff4a00"
+          color="#34d399"
+          emissive="#10b981"
           emissiveIntensity={0.95}
           roughness={0.15}
           metalness={0.1}
@@ -295,7 +295,7 @@ function SolarSphere({ isAnyHovered }: { isAnyHovered: boolean }) {
       <mesh ref={halo1}>
         <sphereGeometry args={[1.25, 16, 16]} />
         <meshBasicMaterial
-          color="#ff5500"
+          color="#34d399"
           transparent
           opacity={0.04}
           side={THREE.BackSide}
@@ -306,7 +306,7 @@ function SolarSphere({ isAnyHovered }: { isAnyHovered: boolean }) {
       <mesh ref={halo2}>
         <sphereGeometry args={[1.65, 16, 16]} />
         <meshBasicMaterial
-          color="#ff4400"
+          color="#22d3ee"
           transparent
           opacity={0.025}
           side={THREE.BackSide}
@@ -319,7 +319,7 @@ function SolarSphere({ isAnyHovered }: { isAnyHovered: boolean }) {
       <mesh ref={ring1} rotation={[Math.PI / 2.6, 0, 0]}>
         <torusGeometry args={[1.9, 0.024, 10, 100]} />
         <meshBasicMaterial
-          color="#ff7700"
+          color="#34d399"
           transparent
           opacity={0.45}
           blending={THREE.AdditiveBlending}
@@ -331,7 +331,7 @@ function SolarSphere({ isAnyHovered }: { isAnyHovered: boolean }) {
       <mesh ref={ring2} rotation={[Math.PI / 2, 0, Math.PI / 4.5]}>
         <torusGeometry args={[2.5, 0.015, 10, 100]} />
         <meshBasicMaterial
-          color="#ffaa00"
+          color="#22d3ee"
           transparent
           opacity={0.2}
           blending={THREE.AdditiveBlending}
@@ -343,7 +343,7 @@ function SolarSphere({ isAnyHovered }: { isAnyHovered: boolean }) {
       <Billboard position={[0, -1.25, 0]}>
         <SafeText
           fontSize={0.11}
-          color="#ff9940"
+          color="#6ee7b7"
           anchorX="center"
           anchorY="middle"
           letterSpacing={0.12}
@@ -774,7 +774,7 @@ function SceneEnvironment() {
   }, [particlePos]);
 
   const grid = useMemo(() => {
-    const helper = new THREE.GridHelper(26, 30, 0x1a0a00, 0x0a0e1a);
+    const helper = new THREE.GridHelper(26, 30, 0x0b3b31, 0x0a1e24);
     const mat = helper.material as THREE.LineBasicMaterial;
     mat.transparent = true;
     mat.opacity = 0.22;
@@ -786,7 +786,7 @@ function SceneEnvironment() {
       {/* Lights */}
       <ambientLight intensity={0.95} color="#0a0a16" />
       <directionalLight position={[4, 7, 4]} intensity={1.1} color="#ffffff" />
-      <pointLight position={[-5, 1, -5]} intensity={3.2} color="#ff6e00" distance={18} decay={2} />
+      <pointLight position={[-5, 1, -5]} intensity={3.2} color="#34d399" distance={18} decay={2} />
       <pointLight position={[5, -2, 5]} intensity={1.05} color="#1e40af" distance={14} decay={2} />
 
       {/* Starfield */}
@@ -813,7 +813,7 @@ function InfoCards({ hoveredId }: InfoCardsProps) {
     <div
       style={{
         padding: "42px 24px 80px",
-        background: "#050505",
+        background: "#06090f",
       }}
     >
       <div
@@ -928,16 +928,14 @@ export default function SolarDecisionOverview() {
   const hoveredModule = hoveredId !== null ? MODULES[hoveredId] : null;
 
   return (
-    <div
-      style={{
-        background: "#050505",
-        color: "#ffffff",
-        fontFamily: "system-ui, -apple-system, 'Segoe UI', sans-serif",
-        width: "100%",
-        minHeight: "100vh",
-        overflowX: "hidden",
-      }}
-    >
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#06090f] text-gray-50 font-sans">
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-emerald-600/10 blur-[150px] rounded-full" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-600/10 blur-[150px] rounded-full" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04] mix-blend-overlay" />
+      </div>
+
+      <div className="relative z-10">
       {/* -- Hero -- */}
       <div
         style={{
@@ -950,7 +948,7 @@ export default function SolarDecisionOverview() {
             fontSize: "10px",
             letterSpacing: "5px",
             textTransform: "uppercase",
-            color: "#ff6e00",
+            color: "#34d399",
             marginBottom: "16px",
             fontWeight: 600,
             opacity: 0.85,
@@ -965,7 +963,10 @@ export default function SolarDecisionOverview() {
             letterSpacing: "0.07em",
             textTransform: "uppercase",
             lineHeight: 0.95,
-            color: "#ffffff",
+            color: "transparent",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            backgroundImage: "linear-gradient(90deg, #f3f4f6 0%, #34d399 42%, #22d3ee 72%, #3b82f6 100%)",
             marginBottom: "20px",
           }}
         >
@@ -974,7 +975,7 @@ export default function SolarDecisionOverview() {
         <p
           style={{
             fontSize: "13px",
-            color: "rgba(255,255,255,0.4)",
+            color: "rgba(229,231,235,0.74)",
             maxWidth: "480px",
             margin: "0 auto",
             lineHeight: 1.75,
@@ -1002,10 +1003,11 @@ export default function SolarDecisionOverview() {
               textTransform: "uppercase",
               textDecoration: "none",
               fontWeight: 700,
-              border: "1px solid #ff6e00",
+              border: "1px solid #34d399",
               borderRadius: "999px",
               padding: "10px 16px",
-              background: "#ff6e00",
+              background: "#34d399",
+              boxShadow: "0 0 24px rgba(52,211,153,0.22)",
             }}
           >
             Watch Demo
@@ -1015,9 +1017,9 @@ export default function SolarDecisionOverview() {
           style={{
             width: "48px",
             height: "2px",
-            background: "#ff6e00",
+            background: "linear-gradient(90deg, #34d399 0%, #22d3ee 100%)",
             margin: "28px auto 0",
-            opacity: 0.55,
+            opacity: 0.9,
           }}
         />
       </div>
@@ -1028,13 +1030,15 @@ export default function SolarDecisionOverview() {
           position: "relative",
           width: "100%",
           height: "520px",
-          background: "#050505",
+          background: "#06090f",
+          borderTop: "1px solid rgba(52,211,153,0.18)",
+          borderBottom: "1px solid rgba(52,211,153,0.12)",
         }}
       >
         <Canvas
           style={{ display: "block", width: "100%", height: "100%" }}
           gl={{ antialias: true, alpha: false }}
-          onCreated={({ gl }) => gl.setClearColor("#050505", 1)}
+          onCreated={({ gl }) => gl.setClearColor("#06090f", 1)}
         >
           <PerspectiveCamera makeDefault position={[0, 3.4, 8.6]} fov={48} near={0.1} far={120} />
           <CameraController hoveredId={hoveredId} />
@@ -1066,7 +1070,7 @@ export default function SolarDecisionOverview() {
             transform: "translateX(-50%)",
             fontSize: "9px",
             letterSpacing: "2px",
-            color: "rgba(255,255,255,0.2)",
+            color: "rgba(110,231,183,0.55)",
             textTransform: "uppercase",
             pointerEvents: "none",
           }}
@@ -1077,6 +1081,7 @@ export default function SolarDecisionOverview() {
 
       {/* -- Info Cards -- */}
       <InfoCards hoveredId={hoveredId} />
+      </div>
     </div>
   );
 }
