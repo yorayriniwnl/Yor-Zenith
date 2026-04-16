@@ -7,106 +7,110 @@ import {
   BarChart3,
   Landmark,
   Home,
+  Zap,
 } from "lucide-react";
+
+const navItems = [
+  { href: "/service1", label: "The Payback Pulse",   icon: Activity },
+  { href: "/service2", label: "The 20 Year Vision",  icon: BarChart3 },
+  { href: "/service3", label: "The Subsidy Scout",   icon: Landmark  },
+  { href: "/service4", label: "The Photon Hunter",   icon: Home      },
+  { href: "/service5", label: "The Grid Guardian",   icon: Zap       },
+];
 
 export default function Sidebar() {
   const pathname = usePathname();
 
-  const isActive = (path: string) => pathname === path;
-
-  const baseClasses =
-    "relative flex items-center gap-3 px-4 py-3 rounded-lg transition group";
-
-  const activeClasses =
-    "text-[#22D3EE] bg-[#0A2A35]";
-
-  const inactiveClasses =
-    "text-[#F3F4F4]/70 hover:bg-[#0A2A35]";
-
   return (
-    <aside
-      className="
-        w-64
-        h-screen
-        bg-[#020B10]
-        border-r border-[#5F9598]/20
-        px-6 py-8
-      "
-    >
-      <h2 className="text-sm uppercase tracking-wider text-[#F3F4F4]/60 mb-6">
+    <aside className="
+      w-64 h-screen
+      bg-[#020B10]
+      border-r border-[#5F9598]/20
+      px-5 py-8
+      flex flex-col
+      relative overflow-hidden
+    ">
+      {/* Subtle ambient glow */}
+      <div className="pointer-events-none absolute -top-20 -left-10 w-56 h-56 rounded-full bg-cyan-500/5 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 w-40 h-40 rounded-full bg-emerald-500/5 blur-3xl" />
+
+      <h2 className="
+        relative text-[10px] uppercase tracking-[0.22em]
+        text-[#F3F4F4]/40 mb-7 px-1 font-semibold
+        after:block after:mt-3 after:h-px after:w-full
+        after:bg-gradient-to-r after:from-cyan-500/30 after:via-white/10 after:to-transparent
+      ">
         Command Center
       </h2>
 
-      <nav className="flex flex-col gap-2">
+      <nav className="relative flex flex-col gap-1">
+        {navItems.map(({ href, label, icon: Icon }) => {
+          const active = pathname === href;
+          return (
+            <Link
+              key={href}
+              href={href}
+              aria-current={active ? "page" : undefined}
+              className={`
+                group relative flex items-center gap-3 px-4 py-3 rounded-xl
+                transition-all duration-200 overflow-hidden
+                ${active
+                  ? "bg-gradient-to-r from-cyan-500/15 to-emerald-500/5 text-cyan-300"
+                  : "text-[#F3F4F4]/55 hover:text-[#F3F4F4]/90 hover:bg-white/[0.04]"
+                }
+              `}
+            >
+              {/* Active indicator bar */}
+              {active && (
+                <span className="
+                  absolute left-0 top-1/2 -translate-y-1/2
+                  h-[60%] w-[3px] rounded-r-full
+                  bg-gradient-to-b from-cyan-400 to-emerald-400
+                  shadow-[0_0_8px_rgba(34,211,238,0.7)]
+                " />
+              )}
 
-        {/* Service 1 */}
-        <Link
-          href="/service1"
-          className={`${baseClasses} ${
-            isActive("/service1") ? activeClasses : inactiveClasses
-          }`}
-          aria-current={isActive("/service1") ? "page" : undefined}
-        >
-          {isActive("/service1") && (
-            <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 bg-cyan-400 rounded-full" />
-          )}
+              {/* Hover shimmer */}
+              <span className="
+                absolute inset-0 opacity-0 group-hover:opacity-100
+                transition-opacity duration-300
+                bg-gradient-to-r from-transparent via-white/[0.02] to-transparent
+              " />
 
-          <Activity size={18} />
-          <span>The Payback Pulse</span>
-        </Link>
+              <Icon
+                size={16}
+                className={`
+                  relative shrink-0 transition-colors duration-200
+                  ${active ? "text-cyan-400 drop-shadow-[0_0_6px_rgba(34,211,238,0.6)]" : "text-[#F3F4F4]/35 group-hover:text-[#F3F4F4]/70"}
+                `}
+              />
+              <span className={`
+                relative text-[13px] font-medium tracking-[0.01em]
+                ${active ? "text-cyan-200" : ""}
+              `}>
+                {label}
+              </span>
 
-
-        {/* Service 2 */}
-        <Link
-          href="/service2"
-          className={`${baseClasses} ${
-            isActive("/service2") ? activeClasses : inactiveClasses
-          }`}
-          aria-current={isActive("/service2") ? "page" : undefined}
-        >
-          {isActive("/service2") && (
-            <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 bg-cyan-400 rounded-full" />
-          )}
-
-          <BarChart3 size={18} />
-          <span>The 20 Year Vision</span>
-        </Link>
-
-
-        {/* Service 3 */}
-        <Link
-          href="/service3"
-          className={`${baseClasses} ${
-            isActive("/service3") ? activeClasses : inactiveClasses
-          }`}
-          aria-current={isActive("/service3") ? "page" : undefined}
-        >
-          {isActive("/service3") && (
-            <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 bg-cyan-400 rounded-full" />
-          )}
-
-          <Landmark size={18} />
-          <span>The Subsidy Scout</span>
-        </Link>
-
-
-        {/* Service 4 */}
-        <Link
-          href="/service4"
-          className={`${baseClasses} ${
-            isActive("/service4") ? activeClasses : inactiveClasses
-          }`}
-          aria-current={isActive("/service4") ? "page" : undefined}
-        >
-          {isActive("/service4") && (
-            <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 bg-cyan-400 rounded-full" />
-          )}
-
-          <Home size={18} />
-          <span>The Photon Hunter</span>
-        </Link>
-
+              {/* NEW badge for service 5 */}
+              {href === "/service5" && !active && (
+                <span className="
+                  relative ml-auto text-[9px] font-bold uppercase tracking-wider
+                  px-1.5 py-0.5 rounded-full
+                  bg-emerald-500/15 border border-emerald-500/30 text-emerald-400
+                ">
+                  New
+                </span>
+              )}
+            </Link>
+          );
+        })}
       </nav>
+
+      {/* Bottom version tag */}
+      <div className="relative mt-auto pt-6 px-1">
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4" />
+        <p className="text-[10px] font-mono text-white/20 tracking-widest">ZENITH v1.0</p>
+      </div>
     </aside>
   );
 }
