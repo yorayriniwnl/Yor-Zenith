@@ -1,0 +1,55 @@
+⚡ Zenith — Final Confirmed Tech Stack
+🖥 Frontend
+
+1.Next.js (App Router)
+2.TypeScript
+3.Tailwind CSS
+4.React Hooks
+5.Recharts (for data visualization)
+6.Fetch API / Axios
+
+⚙ Backend
+
+1.FastAPI (Python)
+2.Uvicorn (ASGI server)
+3.Pydantic (data validation)
+4.REST API architecture
+
+🗄 Database
+
+1.PostgreSQL
+2.SQLAlchemy (ORM)
+3.Alembic (migrations)
+
+🧠 Computation & Modeling Layer
+
+1.NumPy
+2.Pandas
+3.SciPy (optimization logic)
+4.Custom deterministic solar/ROI/grid algorithms
+
+🤖 AI Layer
+
+1.Gemini API
+Used for:
+Personalized energy feasibility explanation
+Subsidy interpretation
+Rooftop analysis reasoning
+Financial summary generation
+
+🔐 Authentication
+
+1.JWT-based authentication
+2.Secure password hashing
+3.Protected API routes
+
+☁ Deployment
+
+1.Vercel (Frontend)
+2.Render (Backend)
+3.Supabase (PostgreSQL hosting)
+
+
+Password and email combination :
+admin@zenith.com
+zenith123
