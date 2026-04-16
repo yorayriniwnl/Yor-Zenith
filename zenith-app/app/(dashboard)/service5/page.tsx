@@ -306,7 +306,7 @@ export default function LumenPage() {
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04] mix-blend-overlay" />
         </div>
 
-        <main className="relative z-10 w-full px-6 py-10 lg:px-16 lg:py-14 space-y-10">
+        <main className="relative z-10 w-full px-4 py-8 sm:px-6 lg:px-8 lg:py-12 2xl:px-12 space-y-10">
 
           {/* ── Hero header ────────────────────────────────────────────────── */}
           <section className="max-w-[84rem] mx-auto">
@@ -386,10 +386,10 @@ export default function LumenPage() {
           )}
 
           {/* ── Main grid ──────────────────────────────────────────────────── */}
-          <section className="max-w-[84rem] mx-auto grid xl:grid-cols-[1.2fr_0.8fr] gap-6 items-start mt-8">
+          <section className="mx-auto mt-8 grid max-w-[84rem] items-start gap-6 2xl:grid-cols-[minmax(0,1.2fr)_minmax(20rem,0.8fr)]">
 
             {/* Left column: flow diagram → BeforeAfterComparison → live feed */}
-            <div className="space-y-6">
+            <div className="min-w-0 space-y-6">
 
               {/* Flow diagram card */}
               <div className="rounded-[3rem] bg-gradient-to-b from-[#050808]/80 to-[#050808]/40 border border-cyan-400/20 p-4 md:p-7 shadow-[0_0_100px_rgba(34,211,238,0.1)]">
@@ -435,11 +435,11 @@ export default function LumenPage() {
             </div>
 
             {/* Right column: optimization summary */}
-            <div className="space-y-6">
+            <div className="min-w-0 space-y-6">
               {result ? (
                 <OptimizationSummary {...result} />
               ) : (
-                <div className="rounded-2xl p-5 space-y-4 w-full max-w-md mx-auto xl:mx-0 bg-cyan-400/[0.05] border border-cyan-400/20">
+                <div className="mx-auto w-full max-w-md space-y-4 rounded-2xl border border-cyan-400/20 bg-cyan-400/[0.05] p-5 2xl:mx-0">
                   <h2 className="text-sm font-semibold uppercase tracking-widest text-cyan-300">
                     Optimization Summary
                   </h2>

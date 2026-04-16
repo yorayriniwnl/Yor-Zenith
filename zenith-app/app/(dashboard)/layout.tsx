@@ -9,14 +9,14 @@ export default function DashboardLayout({
   return (
     <AuthGuard>
       <div className="min-h-screen bg-[#050808] text-[#F3F4F4]">
-        <div className="pt-24 flex">
+        <div className="flex min-w-0 pt-24">
           {/* FIXED SIDEBAR */}
           <div className="fixed left-0 top-24 h-[calc(100vh-6rem)] w-64">
             <Sidebar />
           </div>
 
           {/* SCROLLABLE MAIN CONTENT */}
-          <main className="ml-64 flex-1 overflow-y-auto p-8 lg:p-10">
+          <main className="ml-64 min-w-0 flex-1 overflow-y-auto p-6 lg:p-8 2xl:p-10">
             <div className="mx-auto w-full max-w-[84rem]">
               {children}
             </div>
