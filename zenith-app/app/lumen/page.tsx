@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import ClientOnly from "@/components/ClientOnly";
 import type { LumenInput, LumenOutput } from "@/lib/lumen/types";
 import MetricsRow from "@/components/lumen/MetricsRow";
 import EnergyFlowDiagram from "@/components/lumen/EnergyFlowDiagram";
@@ -258,7 +259,8 @@ export default function LumenPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#06090f] text-gray-50 selection:bg-emerald-500/30 overflow-x-hidden">
+    <ClientOnly fallback={<div className="min-h-screen bg-[#06090f]" />}>
+      <div className="min-h-screen bg-[#06090f] text-gray-50 selection:bg-emerald-500/30 overflow-x-hidden">
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-emerald-600/10 blur-[150px] rounded-full" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-600/10 blur-[150px] rounded-full" />
@@ -385,6 +387,7 @@ export default function LumenPage() {
         </section>
 
       </main>
-    </div>
+      </div>
+    </ClientOnly>
   );
 }

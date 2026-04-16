@@ -1,4 +1,5 @@
 import "./globals.css";
+import ClientOnly from "@/components/ClientOnly";
 import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
 
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="text-[95.5%]" suppressHydrationWarning>
       <body className="min-h-screen">
-        <Navbar />
+        <ClientOnly>
+          <Navbar />
+        </ClientOnly>
         {children}
       </body>
     </html>
