@@ -165,10 +165,10 @@ function BeforeAfterCard() {
 // ─── Tiny story ───────────────────────────────────────────────────────────────
 function TinyStory() {
   return (
-    <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/[0.08] px-6 py-5 flex gap-4 items-start shadow-[0_0_30px_rgba(34,211,238,0.08)]">
+    <div className="rounded-2xl border border-orange-400/20 bg-orange-400/[0.08] px-6 py-5 flex gap-4 items-start shadow-[0_0_30px_rgba(249,115,22,0.08)]">
       <span className="text-2xl mt-0.5 shrink-0">⚡</span>
       <div>
-        <p className="text-xs font-semibold uppercase tracking-widest text-cyan-300 mb-2">
+        <p className="text-xs font-semibold uppercase tracking-widest text-orange-400 mb-2">
           A day in the life
         </p>
         <p className="text-sm text-gray-400 leading-relaxed">
@@ -319,7 +319,7 @@ export default function LumenPage() {
             </div>
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
               <div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.02] mb-4 tracking-tighter">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.02] mb-4 tracking-tighter text-white">
                   Lumen Logic
                 </h1>
                 <p className="text-[1.05rem] text-gray-400 max-w-2xl leading-relaxed font-light">
@@ -375,8 +375,8 @@ export default function LumenPage() {
           {/* ── Before vs After static card ────────────────────────────────── */}
           <section className="max-w-[84rem] mx-auto">
             <div className="mb-4 flex items-center gap-3">
-              <h2 className="text-xl font-bold text-cyan-300">Before vs After</h2>
-              <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/30 text-cyan-300">
+              <h2 className="text-2xl font-bold text-cyan-400">Before vs After</h2>
+              <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-400">
                 Must See
               </span>
             </div>
