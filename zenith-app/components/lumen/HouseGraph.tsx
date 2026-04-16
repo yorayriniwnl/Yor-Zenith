@@ -9,13 +9,13 @@ interface HouseGraphProps {
 
 export default function HouseGraph({ data, isRunning }: HouseGraphProps) {
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-[#08090d] p-6 md:p-8">
+    <div className="rounded-2xl border border-cyan-400/20 bg-[#050808]/95 backdrop-blur-sm p-6 md:p-8 shadow-[0_0_30px_rgba(34,211,238,0.1)]">
       <div className="flex items-center gap-3 mb-6">
-        <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-slate-300">
-          Microgrid Houses
+        <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-cyan-300">
+          ⚡ Microgrid Houses
         </h3>
         {isRunning && (
-          <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/20 text-cyan-400 flex items-center gap-1.5">
+          <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 flex items-center gap-1.5">
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-500" />
@@ -199,24 +199,24 @@ export default function HouseGraph({ data, isRunning }: HouseGraphProps) {
       </svg>
 
       {/* Stats footer */}
-      <div className="mt-6 grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
+      <div className="mt-6 grid grid-cols-3 gap-4 pt-6 border-t border-cyan-400/10">
         <div className="text-center">
-          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold mb-1">
+          <p className="text-[10px] uppercase tracking-widest text-cyan-400/70 font-semibold mb-1">
             Grid Reduction
           </p>
-          <p className="text-lg font-bold text-emerald-400">{(data.efficiency_gain_percent || 0).toFixed(1)}%</p>
+          <p className="text-lg font-bold text-cyan-300">{(data.efficiency_gain_percent || 0).toFixed(1)}%</p>
         </div>
         <div className="text-center">
-          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold mb-1">
+          <p className="text-[10px] uppercase tracking-widest text-cyan-400/70 font-semibold mb-1">
             Total Savings
           </p>
-          <p className="text-lg font-bold text-green-400">₹{data.savings.toFixed(2)}</p>
+          <p className="text-lg font-bold text-emerald-400">₹{data.savings.toFixed(2)}</p>
         </div>
         <div className="text-center">
-          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold mb-1">
+          <p className="text-[10px] uppercase tracking-widest text-cyan-400/70 font-semibold mb-1">
             Optimized Cost
           </p>
-          <p className="text-lg font-bold text-cyan-400">₹{data.total_cost.toFixed(2)}</p>
+          <p className="text-lg font-bold text-cyan-300">₹{data.total_cost.toFixed(2)}</p>
         </div>
       </div>
     </div>
