@@ -386,7 +386,7 @@ export default function LumenPage() {
           )}
 
           {/* ── Main grid ──────────────────────────────────────────────────── */}
-          <section className="max-w-[84rem] mx-auto grid xl:grid-cols-[1.2fr_0.8fr] gap-6 items-start">
+          <section className="max-w-[84rem] mx-auto grid xl:grid-cols-[1.2fr_0.8fr] gap-6 items-start mt-8">
 
             {/* Left column: flow diagram → BeforeAfterComparison → live feed */}
             <div className="space-y-6">
@@ -405,7 +405,7 @@ export default function LumenPage() {
                 {result ? (
                   <EnergyFlowDiagram data={result} />
                 ) : (
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-10 text-center text-gray-400">
+                  <div className="rounded-2xl border border-cyan-400/10 bg-cyan-400/[0.02] p-10 text-center text-cyan-300/60">
                     Hit{" "}
                     <span className="text-emerald-400 font-semibold">Run Optimization</span>{" "}
                     above or fill the form below to visualize energy flows.
@@ -418,7 +418,7 @@ export default function LumenPage() {
                 {result && (
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
-                      <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-slate-300">
+                        <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-cyan-300">
                         Live Cost Breakdown
                       </h3>
                       <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/20 text-emerald-400">
@@ -439,11 +439,11 @@ export default function LumenPage() {
               {result ? (
                 <OptimizationSummary {...result} />
               ) : (
-                <div className="rounded-2xl p-5 space-y-4 w-full max-w-md mx-auto xl:mx-0 bg-white/[0.03] border border-white/10">
-                  <h2 className="text-sm font-semibold uppercase tracking-widest text-slate-300">
+                <div className="rounded-2xl p-5 space-y-4 w-full max-w-md mx-auto xl:mx-0 bg-cyan-400/[0.05] border border-cyan-400/20">
+                  <h2 className="text-sm font-semibold uppercase tracking-widest text-cyan-300">
                     Optimization Summary
                   </h2>
-                  <p className="text-sm text-slate-400">
+                  <p className="text-sm text-cyan-200/60">
                     Baseline vs optimized cost, grid usage, and P2P trade summary will appear here.
                   </p>
                 </div>
