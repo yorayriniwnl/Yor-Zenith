@@ -15,7 +15,7 @@ const SVG_NODE = {
   houseA:  { x: 108, y: 262 },
   houseB:  { x: 360, y: 165 },
   houseC:  { x: 612, y: 262 },
-  battery: { x: 360, y: 432 },
+  battery: { x: 360, y: 400 },
 };
 
 // Percentage positions for absolute HTML cards
@@ -24,7 +24,7 @@ const HTML_POS = {
   houseA:  { left: "15%",  top: "52.4%" },
   houseB:  { left: "50%",  top: "33%"   },
   houseC:  { left: "85%",  top: "52.4%" },
-  battery: { left: "50%",  top: "86.4%" },
+  battery: { left: "50%",  top: "79.5%" },
 };
 
 // ─── Flow Definitions ─────────────────────────────────────────────────────────
@@ -513,7 +513,7 @@ export default function EnergyFlowDiagram({ data }: Props) {
         style={{
           position: "relative",
           width: "100%",
-          minHeight: "500px",
+          minHeight: "540px",
           background: "linear-gradient(160deg, #07090f 0%, #050710 100%)",
           border: "1px solid rgba(255,255,255,0.065)",
           borderRadius: "20px",
