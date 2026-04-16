@@ -335,8 +335,8 @@ function NodeCard({
             background: "linear-gradient(148deg, rgba(16,22,36,0.97) 0%, rgba(8,11,18,0.99) 100%)",
             border: `1px solid ${borderColor}`,
             borderRadius: "16px",
-            padding: "12px 14px",
-            minWidth: "108px",
+            padding: "clamp(10px, 1.8vw, 12px) clamp(10px, 2vw, 14px)",
+            minWidth: "clamp(90px, 14vw, 108px)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",
             animation: `${glowAnim} ${glowAnimDuration} ease-in-out infinite`,
@@ -509,23 +509,21 @@ export default function EnergyFlowDiagram({ data }: Props) {
     <>
       <style>{KEYFRAMES}</style>
 
-      <div style={{ width: "100%", overflowX: "auto", overflowY: "hidden" }}>
-        <div style={{ minWidth: `${VW}px` }}>
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              minHeight: "500px",
-              background: "linear-gradient(160deg, #07090f 0%, #050710 100%)",
-              border: "1px solid rgba(255,255,255,0.065)",
-              borderRadius: "20px",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04), 0 0 80px rgba(0,0,0,0.5)",
-              overflow: "visible",
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(14px)",
-              transition: "opacity 0.55s ease, transform 0.55s ease",
-            }}
-          >
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          minHeight: "500px",
+          background: "linear-gradient(160deg, #07090f 0%, #050710 100%)",
+          border: "1px solid rgba(255,255,255,0.065)",
+          borderRadius: "20px",
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04), 0 0 80px rgba(0,0,0,0.5)",
+          overflow: "hidden",
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(14px)",
+          transition: "opacity 0.55s ease, transform 0.55s ease",
+        }}
+      >
         {/* ── Background grid texture ── */}
         <div
           style={{
@@ -660,52 +658,53 @@ export default function EnergyFlowDiagram({ data }: Props) {
         </NodeCard>
 
             {/* ── Legend ── */}
-            <div
+        <div
+          style={{
+            position: "absolute",
+            bottom: 14,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 12,
+            maxWidth: "calc(100% - 24px)",
+            zIndex: 20,
+            background: "rgba(4,6,12,0.72)",
+            border: "1px solid rgba(255,255,255,0.06)",
+            borderRadius: 99,
+            padding: "5px 12px",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          {[
+            { color: "#22d3ee", label: "P2P Transfer", dash: "5 3" },
+            { color: "#fbbf24", label: "Grid Supply", dash: "5 3" },
+          ].map(({ color, label, dash }) => (
+            <span
+              key={label}
               style={{
-                position: "absolute",
-                bottom: 14,
-                left: "50%",
-                transform: "translateX(-50%)",
                 display: "flex",
-                gap: 20,
-                zIndex: 20,
-                background: "rgba(4,6,12,0.72)",
-                border: "1px solid rgba(255,255,255,0.06)",
-                borderRadius: 99,
-                padding: "5px 14px",
-                backdropFilter: "blur(8px)",
+                alignItems: "center",
+                gap: 6,
+                fontSize: 9.5,
+                fontFamily: "ui-monospace, 'Cascadia Code', monospace",
+                color: `${color}99`,
+                letterSpacing: "0.07em",
               }}
             >
-              {[
-                { color: "#22d3ee", label: "P2P Transfer",  dash: "5 3" },
-                { color: "#fbbf24", label: "Grid Supply",   dash: "5 3" },
-              ].map(({ color, label, dash }) => (
-                <span
-                  key={label}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    fontSize: 9.5,
-                    fontFamily: "ui-monospace, 'Cascadia Code', monospace",
-                    color: `${color}99`,
-                    letterSpacing: "0.07em",
-                  }}
-                >
-                  <svg width="18" height="4">
-                    <line
-                      x1="0" y1="2" x2="18" y2="2"
-                      stroke={color}
-                      strokeWidth="1.8"
-                      strokeOpacity="0.75"
-                      strokeDasharray={dash}
-                    />
-                  </svg>
-                  {label}
-                </span>
-              ))}
-            </div>
-          </div>
+              <svg width="18" height="4">
+                <line
+                  x1="0" y1="2" x2="18" y2="2"
+                  stroke={color}
+                  strokeWidth="1.8"
+                  strokeOpacity="0.75"
+                  strokeDasharray={dash}
+                />
+              </svg>
+              {label}
+            </span>
+          ))}
         </div>
       </div>
     </>
