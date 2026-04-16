@@ -373,15 +373,17 @@ export default function LumenPage() {
           )}
 
           {/* ── Before vs After static card ────────────────────────────────── */}
-          <section className="max-w-[84rem] mx-auto">
-            <div className="mb-4 flex items-center gap-3">
-              <h2 className="text-2xl font-bold text-cyan-400">Before vs After</h2>
-              <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-400">
-                Must See
-              </span>
-            </div>
-            <BeforeAfterCard />
-          </section>
+          {result && (
+            <section className="max-w-[84rem] mx-auto">
+              <div className="mb-4 flex items-center gap-3">
+                <h2 className="text-2xl font-bold text-cyan-400">Before vs After</h2>
+                <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-400">
+                  Must See
+                </span>
+              </div>
+              <BeforeAfterCard />
+            </section>
+          )}
 
           {/* ── Main grid ──────────────────────────────────────────────────── */}
           <section className="max-w-[84rem] mx-auto grid xl:grid-cols-[1.2fr_0.8fr] gap-6 items-start">
