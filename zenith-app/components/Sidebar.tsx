@@ -22,7 +22,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="relative flex h-full w-[22rem] flex-col overflow-hidden border-r border-cyan-500/12 bg-[#041019] px-7 py-11 shadow-[inset_-1px_0_0_rgba(12,42,54,0.9)]">
+    <aside className="relative flex h-full w-[22rem] flex-col overflow-hidden border-r border-cyan-500/12 bg-black px-7 py-11 shadow-[inset_-1px_0_0_rgba(12,42,54,0.9)]">
       <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent" />
 
       <h2 className="mb-8 px-1 text-[0.95rem] font-medium uppercase tracking-[0.08em] text-[#c0b8ab]">
