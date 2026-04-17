@@ -129,12 +129,12 @@ function BarColumn({
             height: mounted ? `${targetH}%` : "0%",
             transitionDuration: "700ms",
             transitionDelay: `${delay}ms`,
-            background: isBase
-              ? "linear-gradient(180deg, rgba(100,116,139,0.55) 0%, rgba(71,85,105,0.35) 100%)"
-              : "linear-gradient(180deg, #4ade80 0%, #16a34a 60%, #14532d 100%)",
+                  background: isBase
+                    ? "linear-gradient(180deg, rgba(22,28,39,0.96) 0%, rgba(14,18,26,0.92) 100%)"
+                    : "linear-gradient(180deg, rgba(22,28,39,0.98) 0%, rgba(10,14,20,0.96) 100%)",
             boxShadow: isBase
               ? "none"
-              : "0 -6px 20px rgba(74,222,128,0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
+                    : "0 -6px 18px rgba(74,222,128,0.12), inset 0 1px 0 rgba(255,255,255,0.08)",
           }}
         >
           {/* Shimmer on optimized */}
@@ -142,7 +142,7 @@ function BarColumn({
             <div
               className="absolute inset-x-0 top-0 h-4 opacity-40"
               style={{
-                background: "linear-gradient(180deg, rgba(255,255,255,0.25) 0%, transparent 100%)",
+                      background: "linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%)",
               }}
             />
           )}
@@ -175,12 +175,12 @@ function Panel({
     <div
       className="flex-1 rounded-2xl p-5 flex flex-col gap-4"
       style={{
-        background: isOpt
-          ? "linear-gradient(135deg, rgba(74,222,128,0.06) 0%, rgba(22,163,74,0.03) 100%)"
-          : "rgba(255,255,255,0.025)",
-        border: isOpt
-          ? "1px solid rgba(74,222,128,0.18)"
-          : "1px solid rgba(255,255,255,0.07)",
+              background: isOpt
+                ? "linear-gradient(135deg, rgba(10,14,20,0.92) 0%, rgba(22,163,74,0.03) 100%)"
+                : "rgba(255,255,255,0.025)",
+              border: isOpt
+                ? "1px solid rgba(74,222,128,0.16)"
+                : "1px solid rgba(255,255,255,0.07)",
       }}
     >
       {/* Panel header */}
@@ -216,8 +216,8 @@ function Panel({
       <div
         className="rounded-xl px-3 py-2.5 flex items-center justify-between"
         style={{
-          background: isOpt ? "rgba(74,222,128,0.07)" : "rgba(255,255,255,0.03)",
-          border: isOpt ? "1px solid rgba(74,222,128,0.15)" : "1px solid rgba(255,255,255,0.06)",
+                background: isOpt ? "rgba(10,14,20,0.9)" : "rgba(255,255,255,0.03)",
+                border: isOpt ? "1px solid rgba(74,222,128,0.12)" : "1px solid rgba(255,255,255,0.06)",
         }}
       >
         <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
