@@ -194,9 +194,9 @@ function SunIcon({ color }: { color: string }) {
           <line
             key={deg}
             x1={12 + 6.5 * Math.cos(r)}
-              width: "min(100%, 520px)",
+            y1={12 + 6.5 * Math.sin(r)}
             x2={12 + 9 * Math.cos(r)}
-              minHeight: "460px",
+            y2={12 + 9 * Math.sin(r)}
           />
         );
       })}
