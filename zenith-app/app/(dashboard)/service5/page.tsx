@@ -66,17 +66,17 @@ function PanelShell({
 }) {
   return (
     <section
-      className={`rounded-[2rem] border border-[#14302c] bg-[#07110f] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)] ${className}`}
+      className={`rounded-2xl border border-[#14302c] bg-[#07110f] p-6 sm:p-8 shadow-[0_24px_80px_rgba(0,0,0,0.35)] ${className}`}
     >
-      <div className="mb-5 flex flex-col gap-4 border-b border-white/5 pb-5 lg:flex-row lg:items-start lg:justify-between">
+      <div className="mb-6 flex flex-col gap-4 border-b border-white/5 pb-6 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[#849796]">
             {eyebrow}
           </p>
-          <h2 className="mt-2 text-[1.8rem] font-bold tracking-[-0.04em] text-white">
+          <h2 className="mt-3 text-[1.5rem] font-bold tracking-[-0.04em] text-white">
             {title}
           </h2>
-          <p className="mt-2 max-w-3xl text-[0.98rem] leading-7 text-[#8ea5b4]">
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-[#8ea5b4]">
             {description}
           </p>
         </div>
@@ -311,18 +311,18 @@ export default function GridGuardianPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(21,214,166,0.05),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(24,207,255,0.06),transparent_25%)]" />
         </div>
 
-        <main className="relative z-10 mx-auto w-full max-w-[92rem] space-y-7 px-6 py-10 lg:px-10 xl:px-14">
-          <section className="border-b border-[#122723] pb-10">
-            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#1a3648] bg-[#101a27]/80 px-5 py-2.5 shadow-[0_0_0_1px_rgba(255,255,255,0.02)_inset]">
+        <main className="relative z-10 mx-auto w-full max-w-[92rem] space-y-8 px-4 py-12 sm:px-6 lg:px-8 lg:py-16 xl:px-12">
+          <section className="border-b border-[#122723] pb-8 md:pb-12">
+            <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-[#1a3648] bg-[#101a27]/80 px-5 py-2.5 shadow-[0_0_0_1px_rgba(255,255,255,0.02)_inset]">
               <Cpu className="h-4 w-4 text-[#14d6a2]" />
               <span className="text-[0.88rem] font-semibold uppercase tracking-[0.12em] text-[#cfd5dd]">
                 Zenith Enterprise OS v6.0
               </span>
             </div>
 
-            <div className="flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
+            <div className="flex flex-col gap-10 xl:flex-row xl:items-end xl:justify-between">
               <div className="max-w-5xl">
-                <h1 className="text-[clamp(3rem,6vw,5.6rem)] font-black leading-[0.96] tracking-[-0.07em] text-white">
+                <h1 className="text-[clamp(2.5rem,5vw,5.2rem)] font-black leading-[0.98] tracking-[-0.07em] text-white">
                   Next-Gen{" "}
                   <span className="text-[#20dfff]">
                     Grid Intelligence
@@ -333,11 +333,11 @@ export default function GridGuardianPage() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <button
                   onClick={handleDemoRun}
                   disabled={isBusy}
-                  className={`rounded-2xl px-6 py-3.5 text-sm font-semibold transition-all ${
+                  className={`rounded-xl px-6 py-3 text-sm font-semibold transition-all ${
                     isBusy
                       ? "cursor-not-allowed border border-cyan-400/[0.15] bg-cyan-400/10 text-cyan-200"
                       : "bg-gradient-to-r from-[#20dfff] to-[#0891b2] text-[#03120f] shadow-[0_16px_40px_rgba(32,223,255,0.18)] hover:brightness-110"
@@ -345,46 +345,46 @@ export default function GridGuardianPage() {
                 >
                   {isBusy ? "Optimization running..." : "Run Optimization"}
                 </button>
-                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] px-5 py-3.5 text-sm text-[#9fb0bb]">
-                  Live control state updates after every dispatch cycle
+                <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-xs sm:text-sm text-[#9fb0bb]">
+                  Live control state updates
                 </div>
               </div>
             </div>
           </section>
 
           {error && (
-            <div className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
               {error}
             </div>
           )}
 
-          <section className="relative rounded-[2.2rem] border border-[#15352f] bg-[#06100e] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.38)] lg:p-8">
-            <div className="absolute left-0 top-0 bottom-0 w-1.5 rounded-l-[2.2rem] bg-gradient-to-b from-[#20dfff] via-[#18c4f4] to-transparent" />
-            <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
-              <div className="flex items-start gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/[0.15] bg-cyan-500/[0.08] text-cyan-300">
+          <section className="relative rounded-2xl border border-[#15352f] bg-[#06100e] p-6 sm:p-8 lg:p-10 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
+            <div className="absolute left-0 top-0 bottom-0 w-1.5 rounded-l-2xl bg-gradient-to-b from-[#20dfff] via-[#18c4f4] to-transparent" />
+            <div className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-12">
+              <div className="flex items-start gap-4 min-w-0">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-cyan-400/[0.15] bg-cyan-500/[0.08] text-cyan-300">
                   <Zap className="h-7 w-7" />
                 </div>
-                <div>
-                  <h2 className="text-[clamp(2rem,4vw,3rem)] font-black tracking-[-0.06em] text-white">
+                <div className="min-w-0">
+                  <h2 className="text-[clamp(1.8rem,5vw,2.8rem)] font-black tracking-[-0.06em] text-white">
                     GridGuardian
                   </h2>
-                  <p className="mt-2 text-[1.05rem] text-[#9fb4ad]">Smart Grid Control Center</p>
-                  <p className="mt-2 max-w-3xl text-[1.12rem] leading-8 text-[#90a9bc]">
+                  <p className="mt-3 text-lg text-[#9fb4ad]">Smart Grid Control Center</p>
+                  <p className="mt-2 max-w-2xl text-base leading-7 text-[#90a9bc]">
                     Control Center for a Connected Microgrid of Multiple Homes
                   </p>
                 </div>
               </div>
 
-              <div className="inline-flex items-center gap-3 rounded-2xl border border-cyan-400/[0.25] bg-cyan-500/[0.1] px-6 py-4 text-[1rem] text-cyan-200 shadow-[0_0_0_1px_rgba(32,223,255,0.08)_inset]">
-                <span className="h-4 w-4 rounded-full bg-[#20dfff] shadow-[0_0_16px_rgba(32,223,255,0.65)]" />
+              <div className="inline-flex items-center gap-3 rounded-xl border border-cyan-400/[0.25] bg-cyan-500/[0.1] px-5 py-3 text-sm text-cyan-200 shadow-[0_0_0_1px_rgba(32,223,255,0.08)_inset] whitespace-nowrap">
+                <span className="h-3 w-3 rounded-full bg-[#20dfff] shadow-[0_0_16px_rgba(32,223,255,0.65)]" />\
                 Optimization Engine: Active &amp; Learning
               </div>
             </div>
 
-            <div className="my-6 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="my-8 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               <OverviewStatCard
                 icon={<ArrowRightLeft className="h-5 w-5" />}
                 label="Total Energy Shared (kWh)"
@@ -412,7 +412,7 @@ export default function GridGuardianPage() {
             </div>
           </section>
 
-          <section className="grid gap-6 xl:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.25fr)]">
+          <section className="grid gap-6 lg:gap-8 xl:grid-cols-[minmax(18rem,0.9fr)_minmax(0,1.3fr)]">
             <div className="space-y-6">
               <PanelShell
                 eyebrow="Configuration"
@@ -429,7 +429,7 @@ export default function GridGuardianPage() {
               >
                 <div className="space-y-4">
                   <StatusAlerts {...displayData} />
-                  <div className="rounded-2xl border border-white/6 bg-[#0b1715] px-4 py-4 text-sm text-[#8ea5b4]">
+                  <div className="rounded-xl border border-white/10 bg-[#0b1715] px-4 py-3 text-xs sm:text-sm text-[#8ea5b4] leading-6">
                     {result
                       ? "Latest optimization synced successfully. Inspect the graph and routing panel for live neighborhood movement."
                       : "Preview metrics are loaded. Run a custom scenario to replace them with your own dispatch output."}
@@ -446,7 +446,7 @@ export default function GridGuardianPage() {
                 title="Live Microgrid View"
                 description="How power moves between homes, the utility connection, and the shared battery."
                 actions={
-                  <div className="rounded-full border border-cyan-400/[0.15] bg-cyan-500/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-cyan-300">
+                  <div className="rounded-full border border-cyan-400/[0.15] bg-cyan-500/10 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-cyan-300 whitespace-nowrap">
                     {isBusy ? "Optimizing" : "Streaming View"}
                   </div>
                 }
@@ -464,7 +464,7 @@ export default function GridGuardianPage() {
             </div>
           </section>
 
-          <section className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)]">
+          <section className="grid gap-6 lg:gap-8 xl:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
             <PanelShell
               eyebrow="Cost Delta"
               title="Before vs After"
