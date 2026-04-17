@@ -1,25 +1,16 @@
+"use client";
+
 import { useState } from "react";
 import type { LumenInput } from "@/lib/lumen/types";
 
-type Preset = {
-  label: string;
-  tag: string;
-  values: LumenInput;
-};
+// ─── Presets ────────────────────────────────────────────────────────────────
 
-type FieldConfig = {
-  key: keyof LumenInput;
-  label: string;
-  unit: string;
-  step: number;
-  min: number;
-  group: "energy" | "price";
-};
+type Preset = { label: string; tag: string; values: LumenInput };
 
 const PRESETS: Preset[] = [
   {
     label: "Sunny Day",
-    tag: "SUN",
+    tag: "☀︎",
     values: {
       solar_A: 8.5,
       demand_A: 2.0,
@@ -32,7 +23,7 @@ const PRESETS: Preset[] = [
   },
   {
     label: "Peak Demand",
-    tag: "PEAK",
+    tag: "⚡",
     values: {
       solar_A: 1.2,
       demand_A: 5.5,
@@ -45,7 +36,7 @@ const PRESETS: Preset[] = [
   },
   {
     label: "Battery Assist",
-    tag: "BATT",
+    tag: "▣",
     values: {
       solar_A: 3.0,
       demand_A: 3.5,
@@ -58,14 +49,25 @@ const PRESETS: Preset[] = [
   },
 ];
 
+// ─── Field config ────────────────────────────────────────────────────────────
+
+type FieldConfig = {
+  key: keyof LumenInput;
+  label: string;
+  unit: string;
+  step: number;
+  min: number;
+  group: "energy" | "price";
+};
+
 const FIELDS: FieldConfig[] = [
-  { key: "solar_A", label: "Solar Output A", unit: "kWh", step: 0.1, min: 0, group: "energy" },
-  { key: "demand_A", label: "Demand A", unit: "kWh", step: 0.1, min: 0, group: "energy" },
-  { key: "demand_B", label: "Demand B", unit: "kWh", step: 0.1, min: 0, group: "energy" },
-  { key: "demand_C", label: "Demand C", unit: "kWh", step: 0.1, min: 0, group: "energy" },
-  { key: "battery_B", label: "Battery B", unit: "kWh", step: 0.1, min: 0, group: "energy" },
-  { key: "grid_price", label: "Grid Price", unit: "Rs/kWh", step: 0.01, min: 0, group: "price" },
-  { key: "p2p_price", label: "P2P Price", unit: "Rs/kWh", step: 0.01, min: 0, group: "price" },
+  { key: "solar_A",   label: "Solar Output A",  unit: "kWh",   step: 0.1, min: 0, group: "energy" },
+  { key: "demand_A",  label: "Demand A",         unit: "kWh",   step: 0.1, min: 0, group: "energy" },
+  { key: "demand_B",  label: "Demand B",         unit: "kWh",   step: 0.1, min: 0, group: "energy" },
+  { key: "demand_C",  label: "Demand C",         unit: "kWh",   step: 0.1, min: 0, group: "energy" },
+  { key: "battery_B", label: "Battery B",        unit: "kWh",   step: 0.1, min: 0, group: "energy" },
+  { key: "grid_price",label: "Grid Price",       unit: "Rs/kWh", step: 0.01, min: 0, group: "price" },
+  { key: "p2p_price", label: "P2P Price",        unit: "Rs/kWh", step: 0.01, min: 0, group: "price" },
 ];
 
 const DEFAULT_VALUES: LumenInput = {
@@ -78,9 +80,7 @@ const DEFAULT_VALUES: LumenInput = {
   p2p_price: 0,
 };
 
-function formatNextValue(value: number, step: number) {
-  return Number(step.toString().split(".")[1]?.length ?? 0) > 0 ? Number(value.toFixed(2)) : value;
-}
+// ─── Sub-components ──────────────────────────────────────────────────────────
 
 function FieldInput({
   config,
@@ -93,82 +93,107 @@ function FieldInput({
 }) {
   const [focused, setFocused] = useState(false);
 
-  function adjust(delta: number) {
-    const nextValue = Math.max(config.min, formatNextValue(value + delta * config.step, config.step));
-    onChange(config.key, nextValue);
-  }
-
   return (
     <div className="group relative">
-      <div className="mb-1.5 flex items-baseline justify-between">
-        <label className="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500 transition-colors duration-150 group-hover:text-slate-400">
+      {/* Label row */}
+      <div className="flex justify-between items-baseline mb-1.5">
+        <label
+          className="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500 group-hover:text-slate-400 transition-colors duration-150"
+        >
           {config.label}
         </label>
-        <span className={`text-[10px] font-mono tracking-wide ${focused ? "text-cyan-300" : "text-slate-600"}`}>
+        <span
+          className={`text-[10px] font-mono tracking-wide transition-colors duration-150 ${
+            focused ? "text-cyan-400" : "text-slate-600"
+          }`}
+        >
           {config.unit}
         </span>
       </div>
 
+      {/* Input wrapper */}
       <div
-        className="relative flex items-center overflow-hidden rounded-xl transition-all duration-150"
+        className="relative flex items-center rounded-lg overflow-hidden transition-all duration-150"
         style={{
-          background: focused ? "rgba(30,203,255,0.06)" : "rgba(255,255,255,0.03)",
-          border: focused ? "1px solid rgba(30,203,255,0.4)" : "1px solid rgba(255,255,255,0.07)",
+          background: focused
+            ? "rgba(6,182,212,0.06)"
+            : "rgba(255,255,255,0.03)",
+          border: focused
+            ? "1px solid rgba(6,182,212,0.45)"
+            : "1px solid rgba(255,255,255,0.07)",
           boxShadow: focused
-            ? "0 0 0 3px rgba(30,203,255,0.08), inset 0 1px 0 rgba(255,255,255,0.03)"
+            ? "0 0 0 3px rgba(6,182,212,0.08), inset 0 1px 0 rgba(255,255,255,0.04)"
             : "inset 0 1px 0 rgba(255,255,255,0.03)",
         }}
       >
+        {/* Left accent bar */}
         <div
-          className="w-0.5 self-stretch shrink-0"
-          style={{ background: focused ? "rgba(20,214,162,0.85)" : "rgba(255,255,255,0.06)" }}
+          className="w-0.5 self-stretch shrink-0 transition-all duration-150"
+          style={{
+            background: focused
+              ? "rgba(6,182,212,0.8)"
+              : "rgba(255,255,255,0.06)",
+          }}
         />
+
         <input
           type="number"
           value={value}
-          min={config.min}
           step={config.step}
-          onChange={(event) => onChange(config.key, parseFloat(event.target.value) || 0)}
+          min={config.min}
+          onChange={(e) =>
+            onChange(config.key, parseFloat(e.target.value) || 0)
+          }
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          className="w-full bg-transparent px-3 py-3 text-sm font-mono text-slate-100 outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          className="w-full bg-transparent px-3 py-2.5 text-sm font-mono text-slate-200 placeholder-slate-700 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
 
-        <div className="flex shrink-0 flex-col border-l border-white/[0.05]">
-          <button
-            type="button"
-            onClick={() => adjust(1)}
-            className="px-2.5 py-1 text-[8px] text-slate-500 transition hover:bg-cyan-400/[0.06] hover:text-cyan-300"
-          >
-            UP
-          </button>
-          <button
-            type="button"
-            onClick={() => adjust(-1)}
-            className="px-2.5 py-1 text-[8px] text-slate-500 transition hover:bg-cyan-400/[0.06] hover:text-cyan-300"
-          >
-            DN
-          </button>
+        {/* Stepper controls */}
+        <div className="flex flex-col border-l border-white/[0.05] shrink-0">
+          {[
+            { dir: 1, icon: "▲" },
+            { dir: -1, icon: "▼" },
+          ].map(({ dir, icon }) => (
+            <button
+              key={dir}
+              onClick={() =>
+                onChange(
+                  config.key,
+                  Math.max(
+                    config.min,
+                    parseFloat(
+                      (value + dir * config.step).toFixed(
+                        config.step < 0.1 ? 2 : 1
+                      )
+                    )
+                  )
+                )
+              }
+              className="px-2.5 py-1 text-[8px] text-slate-600 hover:text-cyan-400 hover:bg-cyan-400/5 transition-all duration-100 leading-none select-none"
+            >
+              {icon}
+            </button>
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
+// ─── Main component ──────────────────────────────────────────────────────────
+
 type ScenarioFormProps = {
-  onSubmit: (data: LumenInput) => void;
+  onSubmitAction: (data: LumenInput) => void;
 };
 
-export default function ScenarioForm({ onSubmit }: ScenarioFormProps) {
+export default function ScenarioForm({ onSubmitAction }: ScenarioFormProps) {
   const [values, setValues] = useState<LumenInput>(DEFAULT_VALUES);
   const [activePreset, setActivePreset] = useState<string | null>(null);
 
-  const energyFields = FIELDS.filter((field) => field.group === "energy");
-  const priceFields = FIELDS.filter((field) => field.group === "price");
-
-  function handleChange(key: keyof LumenInput, value: number) {
+  function handleChange(key: keyof LumenInput, val: number) {
     setActivePreset(null);
-    setValues((current) => ({ ...current, [key]: value }));
+    setValues((prev) => ({ ...prev, [key]: val }));
   }
 
   function applyPreset(preset: Preset) {
@@ -176,81 +201,104 @@ export default function ScenarioForm({ onSubmit }: ScenarioFormProps) {
     setValues(preset.values);
   }
 
+  const energyFields = FIELDS.filter((f) => f.group === "energy");
+  const priceFields = FIELDS.filter((f) => f.group === "price");
+
   return (
     <div
-      className="w-full overflow-hidden rounded-[1.75rem]"
+      className="w-full max-w-md rounded-2xl overflow-hidden"
       style={{
-        background: "linear-gradient(160deg, rgba(10,18,20,0.98) 0%, rgba(7,13,16,0.98) 100%)",
-        border: "1px solid rgba(29,65,61,0.95)",
-        boxShadow: "0 24px 64px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04) inset",
+        background:
+          "linear-gradient(160deg, rgba(15,20,30,0.98) 0%, rgba(10,14,22,0.98) 100%)",
+        border: "1px solid rgba(255,255,255,0.07)",
+        boxShadow:
+          "0 24px 64px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.06) inset",
       }}
     >
-      <div className="border-b border-white/[0.05] px-5 pb-4 pt-5">
+      {/* ── Header ── */}
+      <div
+        className="px-5 pt-5 pb-4"
+        style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+      >
         <div className="flex items-center gap-2.5">
           <div
-            className="h-5 w-1.5 rounded-full"
+            className="w-1.5 h-5 rounded-full"
             style={{
-              background: "linear-gradient(180deg, #14d6a2 0%, #1ecbff 100%)",
-              boxShadow: "0 0 12px rgba(30,203,255,0.28)",
+              background: "linear-gradient(180deg, #22d3ee 0%, #0891b2 100%)",
+              boxShadow: "0 0 8px rgba(34,211,238,0.5)",
             }}
           />
           <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-slate-200">
             Scenario Config
           </h2>
         </div>
-        <p className="ml-4 mt-1.5 text-[11px] tracking-wide text-slate-500">
+        <p className="text-[11px] text-slate-600 mt-1.5 ml-4 tracking-wide">
           Configure energy inputs and run optimization
         </p>
       </div>
 
-      <div className="space-y-5 p-5">
+      <div className="p-5 space-y-5">
+        {/* ── Presets ── */}
         <div>
-          <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-600">
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-600 mb-2.5">
             Quick Presets
           </p>
           <div className="grid grid-cols-3 gap-2">
             {PRESETS.map((preset) => {
               const isActive = activePreset === preset.label;
-
               return (
                 <button
                   key={preset.label}
-                  type="button"
                   onClick={() => applyPreset(preset)}
-                  className="relative overflow-hidden rounded-xl px-2 py-3 text-center transition-all duration-200"
+                  className="relative flex flex-col items-center gap-1.5 rounded-xl py-3 px-2 text-center transition-all duration-200 group overflow-hidden"
                   style={{
-                    background: isActive ? "rgba(30,203,255,0.1)" : "rgba(255,255,255,0.03)",
-                    border: isActive ? "1px solid rgba(30,203,255,0.35)" : "1px solid rgba(255,255,255,0.06)",
+                    background: isActive
+                      ? "rgba(6,182,212,0.1)"
+                      : "rgba(255,255,255,0.03)",
+                    border: isActive
+                      ? "1px solid rgba(6,182,212,0.4)"
+                      : "1px solid rgba(255,255,255,0.06)",
                     boxShadow: isActive
-                      ? "0 0 16px rgba(30,203,255,0.08), inset 0 1px 0 rgba(30,203,255,0.15)"
+                      ? "0 0 16px rgba(6,182,212,0.1), inset 0 1px 0 rgba(6,182,212,0.15)"
                       : "inset 0 1px 0 rgba(255,255,255,0.04)",
                   }}
                 >
+                  {/* active glow layer */}
                   {isActive && (
                     <div
-                      className="pointer-events-none absolute inset-0"
+                      className="absolute inset-0 pointer-events-none"
                       style={{
-                        background: "radial-gradient(ellipse at 50% 0%, rgba(30,203,255,0.12) 0%, transparent 70%)",
+                        background:
+                          "radial-gradient(ellipse at 50% 0%, rgba(6,182,212,0.12) 0%, transparent 70%)",
                       }}
                     />
                   )}
-                  <div className={`relative text-[11px] font-bold uppercase tracking-[0.22em] ${isActive ? "text-cyan-300" : "text-slate-500"}`}>
+                  <span
+                    className={`text-base leading-none transition-colors duration-150 ${
+                      isActive ? "text-cyan-300" : "text-slate-500 group-hover:text-slate-300"
+                    }`}
+                  >
                     {preset.tag}
-                  </div>
-                  <div className={`relative mt-1 text-[10px] font-semibold ${isActive ? "text-cyan-300" : "text-slate-400"}`}>
+                  </span>
+                  <span
+                    className={`text-[10px] font-semibold tracking-wide transition-colors duration-150 ${
+                      isActive ? "text-cyan-300" : "text-slate-500 group-hover:text-slate-300"
+                    }`}
+                  >
                     {preset.label}
-                  </div>
+                  </span>
                 </button>
               );
             })}
           </div>
         </div>
 
+        {/* ── Energy inputs ── */}
         <div>
-          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-600">
-            Energy - kWh
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-600 mb-3">
+            Energy · kWh
           </p>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-2 gap-3">
             {energyFields.map((field) => (
               <FieldInput
                 key={field.key}
@@ -262,6 +310,7 @@ export default function ScenarioForm({ onSubmit }: ScenarioFormProps) {
           </div>
         </div>
 
+        {/* Divider */}
         <div
           className="h-px"
           style={{
@@ -270,11 +319,12 @@ export default function ScenarioForm({ onSubmit }: ScenarioFormProps) {
           }}
         />
 
+        {/* ── Price inputs ── */}
         <div>
-          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-600">
-            Pricing - Rs/kWh
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-600 mb-3">
+            Pricing · Rs/kWh
           </p>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-2 gap-3">
             {priceFields.map((field) => (
               <FieldInput
                 key={field.key}
@@ -286,25 +336,35 @@ export default function ScenarioForm({ onSubmit }: ScenarioFormProps) {
           </div>
         </div>
 
+        {/* ── Submit ── */}
         <button
-          type="button"
-          onClick={() => onSubmit(values)}
-          className="relative w-full overflow-hidden rounded-xl py-3 text-sm font-bold uppercase tracking-[0.12em] text-slate-950 transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
+          onClick={() => onSubmitAction(values)}
+          className="relative w-full rounded-xl py-3 text-sm font-bold uppercase tracking-[0.12em] text-slate-900 overflow-hidden transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
           style={{
-            background: "linear-gradient(135deg, #14d6a2 0%, #1ecbff 52%, #37bcff 100%)",
-            boxShadow: "0 4px 20px rgba(30,203,255,0.2), 0 1px 0 rgba(255,255,255,0.25) inset",
+            background:
+              "linear-gradient(135deg, #22d3ee 0%, #06b6d4 50%, #0891b2 100%)",
+            boxShadow:
+              "0 4px 20px rgba(6,182,212,0.35), 0 1px 0 rgba(255,255,255,0.25) inset",
           }}
         >
+          {/* shimmer layer */}
           <span
-            className="pointer-events-none absolute inset-0"
+            className="absolute inset-0 pointer-events-none"
             style={{
-              background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.16) 50%, transparent 60%)",
+              background:
+                "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%)",
             }}
           />
           <span className="relative flex items-center justify-center gap-2">
-            <span className="h-1 w-1 rounded-full bg-slate-950/40" aria-hidden="true" />
+            <span
+              className="w-1 h-1 rounded-full bg-slate-900/40"
+              aria-hidden="true"
+            />
             Run Optimization
-            <span className="h-1 w-1 rounded-full bg-slate-950/40" aria-hidden="true" />
+            <span
+              className="w-1 h-1 rounded-full bg-slate-900/40"
+              aria-hidden="true"
+            />
           </span>
         </button>
       </div>

@@ -419,7 +419,7 @@ export default function GridGuardianPage() {
                 title="Control Inputs"
                 description="Calibrate generation, household demand, battery support, and tariff logic for the optimizer."
               >
-                <ScenarioForm onSubmit={handleRun} />
+                <ScenarioForm onSubmitAction={handleRun} />
               </PanelShell>
 
               <PanelShell

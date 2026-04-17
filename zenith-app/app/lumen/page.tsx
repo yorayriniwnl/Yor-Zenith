@@ -383,7 +383,7 @@ export default function LumenPage() {
 
         {/* Custom scenario form */}
         <section className="max-w-[84rem] mx-auto">
-          <ScenarioForm onSubmit={handleRun} />
+          <ScenarioForm onSubmitAction={handleRun} />
         </section>
 
       </main>
