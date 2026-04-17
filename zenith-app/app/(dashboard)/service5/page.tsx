@@ -311,7 +311,7 @@ export default function GridGuardianPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(21,214,166,0.05),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(24,207,255,0.06),transparent_25%)]" />
         </div>
 
-        <main className="relative z-10 mx-auto w-full max-w-[92rem] space-y-8 px-4 py-12 sm:px-6 lg:px-8 lg:py-16 xl:px-12">
+        <main className="relative z-10 mx-auto w-full max-w-[78rem] space-y-6 px-4 py-12 sm:px-6 lg:px-8 lg:py-14 xl:px-10">
           <section className="border-b border-[#122723] pb-8 md:pb-12">
             <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-[#1a3648] bg-[#101a27]/80 px-5 py-2.5 shadow-[0_0_0_1px_rgba(255,255,255,0.02)_inset]">
               <Cpu className="h-4 w-4 text-[#14d6a2]" />
@@ -320,9 +320,9 @@ export default function GridGuardianPage() {
               </span>
             </div>
 
-            <div className="flex flex-col gap-10 xl:flex-row xl:items-end xl:justify-between">
+            <div className="flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
               <div className="max-w-5xl">
-                <h1 className="text-[clamp(2.5rem,5vw,5.2rem)] font-black leading-[0.98] tracking-[-0.07em] text-white">
+                <h1 className="text-[clamp(2.35rem,4.7vw,5rem)] font-black leading-[0.98] tracking-[-0.07em] text-white">
                   Next-Gen{" "}
                   <span className="text-[#20dfff]">
                     Grid Intelligence
@@ -358,9 +358,9 @@ export default function GridGuardianPage() {
             </div>
           )}
 
-          <section className="relative rounded-2xl border border-[#15352f] bg-[#06100e] p-6 sm:p-8 lg:p-10 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
+          <section className="relative rounded-2xl border border-[#15352f] bg-[#06100e] p-6 sm:p-8 lg:p-9 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
             <div className="absolute left-0 top-0 bottom-0 w-1.5 rounded-l-2xl bg-gradient-to-b from-[#20dfff] via-[#18c4f4] to-transparent" />
-            <div className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-12">
+            <div className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-10">
               <div className="flex items-start gap-4 min-w-0">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-cyan-400/[0.15] bg-cyan-500/[0.08] text-cyan-300">
                   <Zap className="h-7 w-7" />
@@ -377,12 +377,12 @@ export default function GridGuardianPage() {
               </div>
 
               <div className="inline-flex items-center gap-3 rounded-xl border border-cyan-400/[0.25] bg-cyan-500/[0.1] px-5 py-3 text-sm text-cyan-200 shadow-[0_0_0_1px_rgba(32,223,255,0.08)_inset] whitespace-nowrap">
-                <span className="h-3 w-3 rounded-full bg-[#20dfff] shadow-[0_0_16px_rgba(32,223,255,0.65)]" />\
+                <span className="h-3 w-3 rounded-full bg-[#20dfff] shadow-[0_0_16px_rgba(32,223,255,0.65)]" />
                 Optimization Engine: Active &amp; Learning
               </div>
             </div>
 
-            <div className="my-8 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="my-7 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               <OverviewStatCard
@@ -412,7 +412,7 @@ export default function GridGuardianPage() {
             </div>
           </section>
 
-          <section className="grid gap-6 lg:gap-8 xl:grid-cols-[minmax(18rem,0.9fr)_minmax(0,1.3fr)]">
+          <section className="grid gap-6 lg:gap-7 xl:grid-cols-[minmax(17rem,0.86fr)_minmax(0,1.14fr)]">
             <div className="space-y-6">
               <PanelShell
                 eyebrow="Configuration"
@@ -464,7 +464,7 @@ export default function GridGuardianPage() {
             </div>
           </section>
 
-          <section className="grid gap-6 lg:gap-8 xl:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
+          <section className="grid gap-6 lg:gap-7 xl:grid-cols-[minmax(0,1.08fr)_minmax(17rem,0.92fr)]">
             <PanelShell
               eyebrow="Cost Delta"
               title="Before vs After"
