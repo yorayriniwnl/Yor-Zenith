@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
@@ -66,7 +66,7 @@ function PanelShell({
 }) {
   return (
     <section
-      className={`rounded-[2rem] border border-[#14302c] bg-[#07110f]/95 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)] ${className}`}
+      className={`rounded-[2rem] border border-[#14302c] bg-[#07110f] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)] ${className}`}
     >
       <div className="mb-5 flex flex-col gap-4 border-b border-white/5 pb-5 lg:flex-row lg:items-start lg:justify-between">
         <div>
@@ -92,38 +92,15 @@ function OverviewStatCard({
   label,
   value,
   helper,
-  accent,
 }: {
   icon: ReactNode;
   label: string;
   value: string;
   helper: string;
-  accent: "emerald" | "cyan" | "blue";
 }) {
-  const styles = {
-    emerald: {
-      line: "from-[#14d6a2] via-[#12c89a] to-transparent",
-      border: "border-emerald-400/20",
-      iconWrap: "bg-emerald-500/10 text-emerald-300",
-      helper: "text-emerald-200/70",
-    },
-    cyan: {
-      line: "from-[#20dfff] via-[#18c4f4] to-transparent",
-      border: "border-cyan-400/20",
-      iconWrap: "bg-cyan-500/10 text-cyan-300",
-      helper: "text-cyan-200/70",
-    },
-    blue: {
-      line: "from-[#6990ff] via-[#37bcff] to-transparent",
-      border: "border-blue-400/20",
-      iconWrap: "bg-blue-500/10 text-blue-300",
-      helper: "text-blue-200/70",
-    },
-  }[accent];
-
   return (
-    <div className={`relative overflow-hidden rounded-[1.65rem] border bg-[#0a1220] p-5 ${styles.border}`}>
-      <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${styles.line}`} />
+    <div className="relative overflow-hidden rounded-[1.65rem] border border-cyan-400/30 bg-[#0a1220] p-5">
+      <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-[#20dfff] via-[#18c4f4] to-transparent" />
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <p className="max-w-[12rem] text-[0.95rem] leading-7 text-[#aab8c5]">
@@ -132,9 +109,9 @@ function OverviewStatCard({
           <p className="mt-5 text-[clamp(2rem,3vw,3.15rem)] font-black tracking-[-0.06em] text-white">
             {value}
           </p>
-          <p className={`mt-2 text-sm ${styles.helper}`}>{helper}</p>
+          <p className="mt-2 text-sm text-cyan-200/70">{helper}</p>
         </div>
-        <div className={`flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl border border-white/10 ${styles.iconWrap}`}>
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-cyan-500/10 text-cyan-300">
           {icon}
         </div>
       </div>
@@ -185,7 +162,7 @@ function SnapshotMeter({
   );
 }
 
-function LiveFeed({ triggered }: { triggered: boolean }) {
+function LiveFeed({ cycle }: { cycle: number }) {
   const [events, setEvents] = useState<
     { id: number; text: string; tone: "emerald" | "cyan" | "amber" }[]
   >([]);
@@ -200,10 +177,12 @@ function LiveFeed({ triggered }: { triggered: boolean }) {
   }, []);
 
   useEffect(() => {
-    if (!triggered) return;
+    if (cycle === 0) return;
 
-    setEvents([]);
-    setSecondsAgo(0);
+    const resetTimer = setTimeout(() => {
+      setEvents([]);
+      setSecondsAgo(0);
+    }, 0);
 
     const timers = FEED_EVENTS.slice(0, 4).map((event, index) =>
       setTimeout(() => {
@@ -212,9 +191,10 @@ function LiveFeed({ triggered }: { triggered: boolean }) {
     );
 
     return () => {
+      clearTimeout(resetTimer);
       timers.forEach(clearTimeout);
     };
-  }, [triggered]);
+  }, [cycle]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -232,7 +212,7 @@ function LiveFeed({ triggered }: { triggered: boolean }) {
   };
 
   return (
-    <section className="rounded-[2rem] border border-[#13322b] bg-[#07110f]/95 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+    <section className="rounded-[2rem] border border-[#13322b] bg-[#07110f] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
       <div className="mb-5 flex items-center justify-between gap-3">
         <div>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[#849796]">
@@ -273,7 +253,7 @@ export default function GridGuardianPage() {
   const [result, setResult] = useState<LumenOutput | null>(null);
   const [loading, setLoading] = useState(false);
   const [demoRunning, setDemoRunning] = useState(false);
-  const [demoTriggered, setDemoTriggered] = useState(false);
+  const [feedCycle, setFeedCycle] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
   const isBusy = loading || demoRunning;
@@ -292,13 +272,12 @@ export default function GridGuardianPage() {
   async function handleDemoRun() {
     if (demoRunning) return;
     setDemoRunning(true);
-    setDemoTriggered(true);
+    setFeedCycle((current) => current + 1);
     setError(null);
     setResult(null);
     await new Promise((resolve) => setTimeout(resolve, 1800));
     setResult(DEMO_OUTPUT);
     setDemoRunning(false);
-    setTimeout(() => setDemoTriggered(false), 250);
   }
 
   async function handleRun(data: LumenInput) {
@@ -315,8 +294,7 @@ export default function GridGuardianPage() {
         throw new Error(json.error || "Failed to run optimization");
       }
       setResult(json);
-      setDemoTriggered(true);
-      setTimeout(() => setDemoTriggered(false), 250);
+      setFeedCycle((current) => current + 1);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -328,8 +306,8 @@ export default function GridGuardianPage() {
     <ClientOnly fallback={<div className="min-h-screen bg-[#040908]" />}>
       <div className="min-h-screen overflow-x-hidden bg-[#040908] text-white selection:bg-cyan-400/20">
         <div className="pointer-events-none fixed inset-0 z-0">
-          <div className="absolute left-[-8%] top-[-18%] h-[30rem] w-[30rem] rounded-full bg-emerald-500/9 blur-[160px]" />
-          <div className="absolute bottom-[-24%] right-[-12%] h-[28rem] w-[28rem] rounded-full bg-cyan-500/8 blur-[160px]" />
+          <div className="absolute left-[-8%] top-[-18%] h-[30rem] w-[30rem] rounded-full bg-emerald-500/[0.09] blur-[160px]" />
+          <div className="absolute bottom-[-24%] right-[-12%] h-[28rem] w-[28rem] rounded-full bg-cyan-500/[0.08] blur-[160px]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(21,214,166,0.05),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(24,207,255,0.06),transparent_25%)]" />
         </div>
 
@@ -361,13 +339,13 @@ export default function GridGuardianPage() {
                   disabled={isBusy}
                   className={`rounded-2xl px-6 py-3.5 text-sm font-semibold transition-all ${
                     isBusy
-                      ? "cursor-not-allowed border border-emerald-400/15 bg-emerald-400/10 text-emerald-200"
+                      ? "cursor-not-allowed border border-emerald-400/[0.15] bg-emerald-400/10 text-emerald-200"
                       : "bg-gradient-to-r from-[#14d6a2] to-[#1ecbff] text-[#03120f] shadow-[0_16px_40px_rgba(30,203,255,0.18)] hover:brightness-110"
                   }`}
                 >
                   {isBusy ? "Optimization running..." : "Run Optimization"}
                 </button>
-                <div className="rounded-2xl border border-white/8 bg-white/[0.03] px-5 py-3.5 text-sm text-[#9fb0bb]">
+                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] px-5 py-3.5 text-sm text-[#9fb0bb]">
                   Live control state updates after every dispatch cycle
                 </div>
               </div>
@@ -380,10 +358,11 @@ export default function GridGuardianPage() {
             </div>
           )}
 
-          <section className="rounded-[2.2rem] border border-[#15352f] bg-[#06100e]/95 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.38)] lg:p-8">
+          <section className="relative rounded-[2.2rem] border border-[#15352f] bg-[#06100e] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.38)] lg:p-8">
+            <div className="absolute left-0 top-0 bottom-0 w-1.5 rounded-l-[2.2rem] bg-gradient-to-b from-[#20dfff] via-[#18c4f4] to-transparent" />
             <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
               <div className="flex items-start gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-emerald-400/15 bg-emerald-500/8 text-emerald-300">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/[0.15] bg-cyan-500/[0.08] text-cyan-300">
                   <Zap className="h-7 w-7" />
                 </div>
                 <div>
@@ -397,8 +376,8 @@ export default function GridGuardianPage() {
                 </div>
               </div>
 
-              <div className="inline-flex items-center gap-3 rounded-2xl border border-emerald-400/18 bg-emerald-500/8 px-6 py-4 text-[1rem] text-emerald-200 shadow-[0_0_0_1px_rgba(20,214,162,0.05)_inset]">
-                <span className="h-4 w-4 rounded-full bg-[#14d6a2] shadow-[0_0_16px_rgba(20,214,162,0.65)]" />
+              <div className="inline-flex items-center gap-3 rounded-2xl border border-cyan-400/[0.25] bg-cyan-500/[0.1] px-6 py-4 text-[1rem] text-cyan-200 shadow-[0_0_0_1px_rgba(32,223,255,0.08)_inset]">
+                <span className="h-4 w-4 rounded-full bg-[#20dfff] shadow-[0_0_16px_rgba(32,223,255,0.65)]" />
                 Optimization Engine: Active &amp; Learning
               </div>
             </div>
@@ -411,28 +390,24 @@ export default function GridGuardianPage() {
                 label="Total Energy Shared (kWh)"
                 value={`${formatMetric(totalShared)} kWh`}
                 helper="Neighborhood exchange across homes"
-                accent="emerald"
               />
               <OverviewStatCard
                 icon={<IndianRupee className="h-5 w-5" />}
                 label="Monthly Savings (Rs)"
                 value={formatInr(monthlySavings)}
                 helper="Projected value from current routing"
-                accent="cyan"
               />
               <OverviewStatCard
                 icon={<Gauge className="h-5 w-5" />}
                 label="Optimization Efficiency (%)"
                 value={`${displayData.efficiency_gain_percent.toFixed(0)}%`}
                 helper="Dispatch gain from current model"
-                accent="blue"
               />
               <OverviewStatCard
                 icon={<Activity className="h-5 w-5" />}
                 label="Autonomous Routing (%)"
                 value={`${autonomousRouting.toFixed(0)}%`}
                 helper="Share of demand handled peer-to-peer"
-                accent="emerald"
               />
             </div>
           </section>
@@ -462,7 +437,7 @@ export default function GridGuardianPage() {
                 </div>
               </PanelShell>
 
-              <LiveFeed triggered={demoTriggered || Boolean(result)} />
+              <LiveFeed cycle={feedCycle} />
             </div>
 
             <div className="space-y-6">
@@ -471,7 +446,7 @@ export default function GridGuardianPage() {
                 title="Live Microgrid View"
                 description="How power moves between homes, the utility connection, and the shared battery."
                 actions={
-                  <div className="rounded-full border border-cyan-400/15 bg-cyan-500/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-cyan-300">
+                  <div className="rounded-full border border-cyan-400/[0.15] bg-cyan-500/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-cyan-300">
                     {isBusy ? "Optimizing" : "Streaming View"}
                   </div>
                 }
@@ -511,8 +486,8 @@ export default function GridGuardianPage() {
                       {formatInr(displayData.baseline_cost * INR_MULTIPLIER)}
                     </p>
                   </div>
-                  <div className="rounded-[1.5rem] border border-emerald-400/12 bg-emerald-500/[0.05] p-4">
-                    <p className="text-sm text-emerald-200/75">Optimized cost</p>
+                  <div className="rounded-[1.5rem] border border-emerald-400/[0.12] bg-emerald-500/[0.05] p-4">
+                    <p className="text-sm text-emerald-200/[0.75]">Optimized cost</p>
                     <p className="mt-3 text-3xl font-black tracking-[-0.05em] text-white">
                       {formatInr(displayData.total_cost * INR_MULTIPLIER)}
                     </p>
