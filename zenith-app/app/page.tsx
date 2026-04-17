@@ -414,7 +414,8 @@ function SolarIntelligenceSection({
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="relative h-[380px] md:h-[420px] rounded-3xl overflow-hidden border border-white/10">
             <img
-              src="/images/service5.jpg"
+              src="/images/service5-lumen.jpg"
+              alt="Connected solar homes exchanging energy across a smart microgrid"
               className="absolute inset-0 w-full h-full object-cover opacity-100"
             />
             <div className="absolute inset-0 bg-black/30" />

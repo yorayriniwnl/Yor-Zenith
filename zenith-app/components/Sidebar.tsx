@@ -11,106 +11,63 @@ import {
 } from "lucide-react";
 
 const navItems = [
-  { href: "/service1", label: "The Payback Pulse",   icon: Activity },
-  { href: "/service2", label: "The 20 Year Vision",  icon: BarChart3 },
-  { href: "/service3", label: "The Subsidy Scout",   icon: Landmark  },
-  { href: "/service4", label: "The Photon Hunter",   icon: Home      },
-  { href: "/service5", label: "The Grid Guardian",   icon: Zap       },
+  { href: "/service1", label: "The Payback Pulse", icon: Activity },
+  { href: "/service2", label: "The 20 Year Vision", icon: BarChart3 },
+  { href: "/service3", label: "The Subsidy Scout", icon: Landmark },
+  { href: "/service4", label: "The Photon Hunter", icon: Home },
+  { href: "/service5", label: "The Grid Guardian", icon: Zap, aliases: ["/lumen"] },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="
-      w-64 h-screen
-      bg-[#020B10]
-      border-r border-[#5F9598]/20
-      px-5 py-8
-      flex flex-col
-      relative overflow-hidden
-    ">
-      {/* Subtle ambient glow */}
-      <div className="pointer-events-none absolute -top-20 -left-10 w-56 h-56 rounded-full bg-cyan-500/5 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-0 w-40 h-40 rounded-full bg-emerald-500/5 blur-3xl" />
+    <aside className="relative flex h-full w-[22rem] flex-col overflow-hidden border-r border-cyan-500/12 bg-[#041019] px-7 py-11 shadow-[inset_-1px_0_0_rgba(12,42,54,0.9)]">
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent" />
 
-      <h2 className="
-        relative text-[10px] uppercase tracking-[0.22em]
-        text-[#F3F4F4]/40 mb-7 px-1 font-semibold
-        after:block after:mt-3 after:h-px after:w-full
-        after:bg-gradient-to-r after:from-cyan-500/30 after:via-white/10 after:to-transparent
-      ">
+      <h2 className="mb-8 px-1 text-[0.95rem] font-medium uppercase tracking-[0.08em] text-[#c0b8ab]">
         Command Center
       </h2>
 
-      <nav className="relative flex flex-col gap-1">
-        {navItems.map(({ href, label, icon: Icon }) => {
-          const active = pathname === href;
+      <nav className="relative flex flex-col gap-2">
+        {navItems.map(({ href, label, icon: Icon, aliases }) => {
+          const active = pathname === href || aliases?.includes(pathname);
           return (
             <Link
               key={href}
               href={href}
               aria-current={active ? "page" : undefined}
               className={`
-                group relative flex items-center gap-3 px-4 py-3 rounded-xl
-                transition-all duration-200 overflow-hidden
+                group relative flex items-center gap-4 overflow-hidden rounded-2xl px-5 py-5
+                transition-all duration-200
                 ${active
-                  ? "bg-gradient-to-r from-cyan-500/15 to-emerald-500/5 text-cyan-300"
-                  : "text-[#F3F4F4]/55 hover:text-[#F3F4F4]/90 hover:bg-white/[0.04]"
+                  ? "bg-[#0a3341] text-[#29ddff] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+                  : "text-[#d4d0c9] hover:bg-white/[0.025] hover:text-white"
                 }
               `}
             >
-              {/* Active indicator bar */}
               {active && (
-                <span className="
-                  absolute left-0 top-1/2 -translate-y-1/2
-                  h-[60%] w-[3px] rounded-r-full
-                  bg-gradient-to-b from-cyan-400 to-emerald-400
-                  shadow-[0_0_8px_rgba(34,211,238,0.7)]
-                " />
+                <span className="absolute left-0 top-1/2 h-9 w-1 -translate-y-1/2 rounded-r-full bg-[#20dfff] shadow-[0_0_14px_rgba(32,223,255,0.45)]" />
               )}
 
-              {/* Hover shimmer */}
-              <span className="
-                absolute inset-0 opacity-0 group-hover:opacity-100
-                transition-opacity duration-300
-                bg-gradient-to-r from-transparent via-white/[0.02] to-transparent
-              " />
-
               <Icon
-                size={16}
+                size={22}
+                strokeWidth={1.9}
                 className={`
                   relative shrink-0 transition-colors duration-200
-                  ${active ? "text-cyan-400 drop-shadow-[0_0_6px_rgba(34,211,238,0.6)]" : "text-[#F3F4F4]/35 group-hover:text-[#F3F4F4]/70"}
+                  ${active ? "text-[#29ddff]" : "text-[#c8c3bc]/90 group-hover:text-white"}
                 `}
               />
               <span className={`
-                relative text-[13px] font-medium tracking-[0.01em]
-                ${active ? "text-cyan-200" : ""}
+                relative text-[1.04rem] font-medium tracking-[-0.01em]
+                ${active ? "text-[#29ddff]" : ""}
               `}>
                 {label}
               </span>
-
-              {/* NEW badge for service 5 */}
-              {href === "/service5" && !active && (
-                <span className="
-                  relative ml-auto text-[9px] font-bold uppercase tracking-wider
-                  px-1.5 py-0.5 rounded-full
-                  bg-emerald-500/15 border border-emerald-500/30 text-emerald-400
-                ">
-                  New
-                </span>
-              )}
             </Link>
           );
         })}
       </nav>
-
-      {/* Bottom version tag */}
-      <div className="relative mt-auto pt-6 px-1">
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4" />
-        <p className="text-[10px] font-mono text-white/20 tracking-widest">ZENITH v1.0</p>
-      </div>
     </aside>
   );
 }
