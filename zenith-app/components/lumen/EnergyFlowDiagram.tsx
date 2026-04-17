@@ -513,7 +513,11 @@ export default function EnergyFlowDiagram({ data }: Props) {
         style={{
           position: "relative",
           width: "100%",
-          minHeight: "540px",
+          minHeight: "520px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "18px 14px 22px",
           background: "linear-gradient(160deg, #07090f 0%, #050710 100%)",
           border: "1px solid rgba(255,255,255,0.065)",
           borderRadius: "20px",
@@ -524,187 +528,197 @@ export default function EnergyFlowDiagram({ data }: Props) {
           transition: "opacity 0.55s ease, transform 0.55s ease",
         }}
       >
-        {/* ── Background grid texture ── */}
         <div
           style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(circle, rgba(255,255,255,0.028) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-            pointerEvents: "none",
-          }}
-        />
-
-        {/* ── SVG overlay for flow lines ── */}
-        <svg
-          viewBox={`0 0 ${VW} ${VH}`}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
+            position: "relative",
+            width: "min(100%, 680px)",
             height: "100%",
-            overflow: "visible",
-            zIndex: 1,
-          }}
-          aria-hidden="true"
-        >
-          {activeFlows.map((flow, i) => (
-            <FlowLine
-              key={`${animKey}-${flow.key}`}
-              flow={flow}
-              value={data[flow.key] as number}
-              index={i}
-              phase={phase}
-            />
-          ))}
-        </svg>
-
-        {/* ── Node: Grid ── */}
-        <NodeCard
-          pos={HTML_POS.grid}
-          glowAnim="glow-yellow"
-          glowAnimDuration="3.8s"
-          floatDelay="0.4s"
-          active={active.grid}
-          activeGlow="rgba(251,191,36,0.55)"
-          borderColor={active.grid ? "rgba(251,191,36,0.28)" : "rgba(255,255,255,0.07)"}
-        >
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-            <div style={{ filter: active.grid ? "drop-shadow(0 0 7px rgba(251,191,36,0.8))" : "none", transition: "filter 0.4s" }}>
-              <GridTowerIcon color={active.grid ? "#fbbf24" : "#6b7280"} />
-            </div>
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: active.grid ? "#fbbf24" : "#6b7280", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>Grid</span>
-            <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>Utility Supply</span>
-          </div>
-        </NodeCard>
-
-        {/* ── Node: House A — Solar Surplus — CYAN ── */}
-        <NodeCard
-          pos={HTML_POS.houseA}
-          glowAnim="glow-cyan"
-          glowAnimDuration="3.5s"
-          floatDelay="0s"
-          hasPulseRing
-          pulseRingColor="rgba(34,211,238,0.5)"
-          active={active.houseA}
-          activeGlow="rgba(34,211,238,0.6)"
-          borderColor={active.houseA ? "rgba(34,211,238,0.3)" : "rgba(255,255,255,0.07)"}
-        >
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-            <div style={{ filter: active.houseA ? "drop-shadow(0 0 8px rgba(34,211,238,0.85))" : "none", transition: "filter 0.4s" }}>
-              <SunIcon color={active.houseA ? "#22d3ee" : "#374151"} />
-            </div>
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: active.houseA ? "#22d3ee" : "#374151", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>House A</span>
-            <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>Solar Surplus</span>
-          </div>
-        </NodeCard>
-
-        {/* ── Node: House B — Generating — GREEN ── */}
-        <NodeCard
-          pos={HTML_POS.houseB}
-          glowAnim="glow-green"
-          glowAnimDuration="4.2s"
-          floatDelay="0.9s"
-          active={active.houseB}
-          activeGlow="rgba(74,222,128,0.55)"
-          borderColor={active.houseB ? "rgba(74,222,128,0.28)" : "rgba(255,255,255,0.07)"}
-        >
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-            <div style={{ filter: active.houseB ? "drop-shadow(0 0 8px rgba(74,222,128,0.85))" : "none", transition: "filter 0.4s" }}>
-              <HomeIcon color={active.houseB ? "#4ade80" : "#374151"} />
-            </div>
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: active.houseB ? "#4ade80" : "#374151", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>House B</span>
-            <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>Generating</span>
-          </div>
-        </NodeCard>
-
-        {/* ── Node: House C — Consuming — AMBER ── */}
-        <NodeCard
-          pos={HTML_POS.houseC}
-          glowAnim="glow-amber"
-          glowAnimDuration="5.5s"
-          floatDelay="1.6s"
-          active={active.houseC}
-          activeGlow="rgba(251,191,36,0.6)"
-          borderColor={active.houseC ? "rgba(251,191,36,0.3)" : "rgba(255,255,255,0.07)"}
-        >
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-            <div style={{ filter: active.houseC ? "drop-shadow(0 0 8px rgba(251,191,36,0.85))" : "none", transition: "filter 0.4s" }}>
-              <BoltIcon color={active.houseC ? "#fbbf24" : "#374151"} />
-            </div>
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: active.houseC ? "#fbbf24" : "#374151", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>House C</span>
-            <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>Consuming</span>
-          </div>
-        </NodeCard>
-
-        {/* ── Node: Battery — PURPLE ── */}
-        <NodeCard
-          pos={HTML_POS.battery}
-          glowAnim="glow-purple"
-          glowAnimDuration="3.2s"
-          floatDelay="2.1s"
-          active={active.battery}
-          activeGlow="rgba(167,139,250,0.55)"
-          borderColor={active.battery ? "rgba(167,139,250,0.28)" : "rgba(255,255,255,0.07)"}
-        >
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-            <div style={{ filter: active.battery ? "drop-shadow(0 0 8px rgba(167,139,250,0.8))" : "none", transition: "filter 0.4s" }}>
-              <BatteryFillIcon color={active.battery ? "#a78bfa" : "#4b5563"} fillPct={batteryFill} />
-            </div>
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: active.battery ? "#a78bfa" : "#4b5563", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>Battery</span>
-            <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>{batteryFill}% charged</span>
-          </div>
-        </NodeCard>
-
-            {/* ── Legend ── */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 14,
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: 12,
-            maxWidth: "calc(100% - 24px)",
-            zIndex: 20,
-            background: "rgba(4,6,12,0.72)",
-            border: "1px solid rgba(255,255,255,0.06)",
-            borderRadius: 99,
-            padding: "5px 12px",
-            backdropFilter: "blur(8px)",
+            minHeight: "500px",
+            margin: "0 auto",
           }}
         >
-          {[
-            { color: "#22d3ee", label: "P2P Transfer", dash: "5 3" },
-            { color: "#fbbf24", label: "Grid Supply", dash: "5 3" },
-          ].map(({ color, label, dash }) => (
-            <span
-              key={label}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                fontSize: 9.5,
-                fontFamily: "ui-monospace, 'Cascadia Code', monospace",
-                color: `${color}99`,
-                letterSpacing: "0.07em",
-              }}
-            >
-              <svg width="18" height="4">
-                <line
-                  x1="0" y1="2" x2="18" y2="2"
-                  stroke={color}
-                  strokeWidth="1.8"
-                  strokeOpacity="0.75"
-                  strokeDasharray={dash}
-                />
-              </svg>
-              {label}
-            </span>
-          ))}
+          {/* ── Background grid texture ── */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage:
+                "radial-gradient(circle, rgba(255,255,255,0.028) 1px, transparent 1px)",
+              backgroundSize: "32px 32px",
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* ── SVG overlay for flow lines ── */}
+          <svg
+            viewBox={`0 0 ${VW} ${VH}`}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              overflow: "visible",
+              zIndex: 1,
+            }}
+            aria-hidden="true"
+          >
+            {activeFlows.map((flow, i) => (
+              <FlowLine
+                key={`${animKey}-${flow.key}`}
+                flow={flow}
+                value={data[flow.key] as number}
+                index={i}
+                phase={phase}
+              />
+            ))}
+          </svg>
+
+          {/* ── Node: Grid ── */}
+          <NodeCard
+            pos={HTML_POS.grid}
+            glowAnim="glow-yellow"
+            glowAnimDuration="3.8s"
+            floatDelay="0.4s"
+            active={active.grid}
+            activeGlow="rgba(251,191,36,0.55)"
+            borderColor={active.grid ? "rgba(251,191,36,0.28)" : "rgba(255,255,255,0.07)"}
+          >
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+              <div style={{ filter: active.grid ? "drop-shadow(0 0 7px rgba(251,191,36,0.8))" : "none", transition: "filter 0.4s" }}>
+                <GridTowerIcon color={active.grid ? "#fbbf24" : "#6b7280"} />
+              </div>
+              <span style={{ fontSize: 10.5, fontWeight: 700, color: active.grid ? "#fbbf24" : "#6b7280", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>Grid</span>
+              <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>Utility Supply</span>
+            </div>
+          </NodeCard>
+
+          {/* ── Node: House A — Solar Surplus — CYAN ── */}
+          <NodeCard
+            pos={HTML_POS.houseA}
+            glowAnim="glow-cyan"
+            glowAnimDuration="3.5s"
+            floatDelay="0s"
+            hasPulseRing
+            pulseRingColor="rgba(34,211,238,0.5)"
+            active={active.houseA}
+            activeGlow="rgba(34,211,238,0.6)"
+            borderColor={active.houseA ? "rgba(34,211,238,0.3)" : "rgba(255,255,255,0.07)"}
+          >
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+              <div style={{ filter: active.houseA ? "drop-shadow(0 0 8px rgba(34,211,238,0.85))" : "none", transition: "filter 0.4s" }}>
+                <SunIcon color={active.houseA ? "#22d3ee" : "#374151"} />
+              </div>
+              <span style={{ fontSize: 10.5, fontWeight: 700, color: active.houseA ? "#22d3ee" : "#374151", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>House A</span>
+              <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>Solar Surplus</span>
+            </div>
+          </NodeCard>
+
+          {/* ── Node: House B — Generating — GREEN ── */}
+          <NodeCard
+            pos={HTML_POS.houseB}
+            glowAnim="glow-green"
+            glowAnimDuration="4.2s"
+            floatDelay="0.9s"
+            active={active.houseB}
+            activeGlow="rgba(74,222,128,0.55)"
+            borderColor={active.houseB ? "rgba(74,222,128,0.28)" : "rgba(255,255,255,0.07)"}
+          >
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+              <div style={{ filter: active.houseB ? "drop-shadow(0 0 8px rgba(74,222,128,0.85))" : "none", transition: "filter 0.4s" }}>
+                <HomeIcon color={active.houseB ? "#4ade80" : "#374151"} />
+              </div>
+              <span style={{ fontSize: 10.5, fontWeight: 700, color: active.houseB ? "#4ade80" : "#374151", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>House B</span>
+              <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>Generating</span>
+            </div>
+          </NodeCard>
+
+          {/* ── Node: House C — Consuming — AMBER ── */}
+          <NodeCard
+            pos={HTML_POS.houseC}
+            glowAnim="glow-amber"
+            glowAnimDuration="5.5s"
+            floatDelay="1.6s"
+            active={active.houseC}
+            activeGlow="rgba(251,191,36,0.6)"
+            borderColor={active.houseC ? "rgba(251,191,36,0.3)" : "rgba(255,255,255,0.07)"}
+          >
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+              <div style={{ filter: active.houseC ? "drop-shadow(0 0 8px rgba(251,191,36,0.85))" : "none", transition: "filter 0.4s" }}>
+                <BoltIcon color={active.houseC ? "#fbbf24" : "#374151"} />
+              </div>
+              <span style={{ fontSize: 10.5, fontWeight: 700, color: active.houseC ? "#fbbf24" : "#374151", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>House C</span>
+              <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>Consuming</span>
+            </div>
+          </NodeCard>
+
+          {/* ── Node: Battery — PURPLE ── */}
+          <NodeCard
+            pos={HTML_POS.battery}
+            glowAnim="glow-purple"
+            glowAnimDuration="3.2s"
+            floatDelay="2.1s"
+            active={active.battery}
+            activeGlow="rgba(167,139,250,0.55)"
+            borderColor={active.battery ? "rgba(167,139,250,0.28)" : "rgba(255,255,255,0.07)"}
+          >
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+              <div style={{ filter: active.battery ? "drop-shadow(0 0 8px rgba(167,139,250,0.8))" : "none", transition: "filter 0.4s" }}>
+                <BatteryFillIcon color={active.battery ? "#a78bfa" : "#4b5563"} fillPct={batteryFill} />
+              </div>
+              <span style={{ fontSize: 10.5, fontWeight: 700, color: active.battery ? "#a78bfa" : "#4b5563", letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.4s" }}>Battery</span>
+              <span style={{ fontSize: 9, color: "rgba(255,255,255,0.26)", marginTop: -2 }}>{batteryFill}% charged</span>
+            </div>
+          </NodeCard>
+
+          {/* ── Legend ── */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 14,
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 12,
+              maxWidth: "calc(100% - 24px)",
+              zIndex: 20,
+              background: "rgba(4,6,12,0.72)",
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderRadius: 99,
+              padding: "5px 12px",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            {[
+              { color: "#22d3ee", label: "P2P Transfer", dash: "5 3" },
+              { color: "#fbbf24", label: "Grid Supply", dash: "5 3" },
+            ].map(({ color, label, dash }) => (
+              <span
+                key={label}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  fontSize: 9.5,
+                  fontFamily: "ui-monospace, 'Cascadia Code', monospace",
+                  color: `${color}99`,
+                  letterSpacing: "0.07em",
+                }}
+              >
+                <svg width="18" height="4">
+                  <line
+                    x1="0" y1="2" x2="18" y2="2"
+                    stroke={color}
+                    strokeWidth="1.8"
+                    strokeOpacity="0.75"
+                    strokeDasharray={dash}
+                  />
+                </svg>
+                {label}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </>
