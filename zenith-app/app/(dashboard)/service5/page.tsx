@@ -222,7 +222,7 @@ function LiveFeed({ cycle }: { cycle: number }) {
             Operational activity
           </h2>
         </div>
-        <div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1.5 text-xs font-medium text-emerald-300">
+        <div className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1.5 text-xs font-medium text-cyan-300">
           Updated {secondsAgo.toFixed(1)}s ago
         </div>
       </div>
@@ -324,7 +324,7 @@ export default function GridGuardianPage() {
               <div className="max-w-5xl">
                 <h1 className="text-[clamp(3rem,6vw,5.6rem)] font-black leading-[0.96] tracking-[-0.07em] text-white">
                   Next-Gen{" "}
-                  <span className="bg-gradient-to-r from-[#14d6a2] via-[#1ecbff] to-[#6b8fff] bg-clip-text text-transparent">
+                  <span className="text-[#20dfff]">
                     Grid Intelligence
                   </span>
                 </h1>
@@ -339,8 +339,8 @@ export default function GridGuardianPage() {
                   disabled={isBusy}
                   className={`rounded-2xl px-6 py-3.5 text-sm font-semibold transition-all ${
                     isBusy
-                      ? "cursor-not-allowed border border-emerald-400/[0.15] bg-emerald-400/10 text-emerald-200"
-                      : "bg-gradient-to-r from-[#14d6a2] to-[#1ecbff] text-[#03120f] shadow-[0_16px_40px_rgba(30,203,255,0.18)] hover:brightness-110"
+                      ? "cursor-not-allowed border border-cyan-400/[0.15] bg-cyan-400/10 text-cyan-200"
+                      : "bg-gradient-to-r from-[#20dfff] to-[#0891b2] text-[#03120f] shadow-[0_16px_40px_rgba(32,223,255,0.18)] hover:brightness-110"
                   }`}
                 >
                   {isBusy ? "Optimization running..." : "Run Optimization"}
