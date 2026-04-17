@@ -21,9 +21,9 @@ const SVG_NODE = {
 // Percentage positions for absolute HTML cards
 const HTML_POS = {
   grid:    { left: "50%",  top: "6.8%"  },
-  houseA:  { left: "18%",  top: "52.4%" },
+  houseA:  { left: "21%",  top: "52.4%" },
   houseB:  { left: "50%",  top: "33%"   },
-  houseC:  { left: "82%",  top: "52.4%" },
+  houseC:  { left: "79%",  top: "52.4%" },
   battery: { left: "50%",  top: "79.5%" },
 };
 
@@ -194,9 +194,9 @@ function SunIcon({ color }: { color: string }) {
           <line
             key={deg}
             x1={12 + 6.5 * Math.cos(r)}
-            y1={12 + 6.5 * Math.sin(r)}
+              width: "min(100%, 520px)",
             x2={12 + 9 * Math.cos(r)}
-            y2={12 + 9 * Math.sin(r)}
+              minHeight: "460px",
           />
         );
       })}
