@@ -22,10 +22,10 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="relative flex h-full w-[22rem] flex-col overflow-hidden border-r border-cyan-500/12 bg-black px-7 py-11 shadow-[inset_-1px_0_0_rgba(12,42,54,0.9)]">
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent" />
+    <aside className="relative flex h-full w-[22rem] flex-col overflow-hidden border-r border-white/5 bg-black px-7 py-11 shadow-[inset_-1px_0_0_rgba(255,255,255,0.03)]">
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
-      <h2 className="mb-8 px-1 text-[0.95rem] font-medium uppercase tracking-[0.08em] text-[#c0b8ab]">
+      <h2 className="mb-8 px-1 text-[0.95rem] font-medium uppercase tracking-[0.08em] text-white/80">
         Command Center
       </h2>
 
@@ -41,13 +41,13 @@ export default function Sidebar() {
                 group relative flex items-center gap-4 overflow-hidden rounded-2xl px-5 py-5
                 transition-all duration-200
                 ${active
-                  ? "bg-[#0a3341] text-[#29ddff] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
-                  : "text-[#d4d0c9] hover:bg-white/[0.025] hover:text-white"
+                  ? "bg-white/[0.04] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+                  : "text-white/78 hover:bg-white/[0.03] hover:text-white"
                 }
               `}
             >
               {active && (
-                <span className="absolute left-0 top-1/2 h-9 w-1 -translate-y-1/2 rounded-r-full bg-[#20dfff] shadow-[0_0_14px_rgba(32,223,255,0.45)]" />
+                <span className="absolute left-0 top-1/2 h-9 w-1 -translate-y-1/2 rounded-r-full bg-white/80 shadow-[0_0_14px_rgba(255,255,255,0.18)]" />
               )}
 
               <Icon
@@ -55,12 +55,12 @@ export default function Sidebar() {
                 strokeWidth={1.9}
                 className={`
                   relative shrink-0 transition-colors duration-200
-                  ${active ? "text-[#29ddff]" : "text-[#c8c3bc]/90 group-hover:text-white"}
+                  ${active ? "text-white" : "text-white/70 group-hover:text-white"}
                 `}
               />
               <span className={`
                 relative text-[1.04rem] font-medium tracking-[-0.01em]
-                ${active ? "text-[#29ddff]" : ""}
+                ${active ? "text-white" : "text-white/88"}
               `}>
                 {label}
               </span>
