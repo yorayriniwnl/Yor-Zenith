@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050808;
+  --foreground: #f3f4f4;
+  --focus-ring: #6ee7b7;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans:
+    "Segoe UI Variable Text", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    "Segoe UI Variable Text", "Segoe UI", Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(52, 211, 153, 0.28);
+  color: #ffffff;
+}
+
+:where(button, a, input, select, textarea):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled),
+a {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.rooftop-kpi-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.rooftop-hardware-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.rooftop-financial-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.rooftop-report-kpis {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.rooftop-scene {
+  height: clamp(320px, 58vh, 820px);
+}
+
+@media (max-width: 1024px) {
+  .rooftop-kpi-grid,
+  .rooftop-report-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .rooftop-kpi-grid,
+  .rooftop-hardware-grid,
+  .rooftop-financial-grid,
+  .rooftop-report-kpis {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rooftop-scene {
+    height: 360px;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}

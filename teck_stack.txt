@@ -1,0 +1,32 @@
+Zenith — Current Technology and Launch Boundaries
+
+Application
+- Next.js 16 App Router
+- React 19 and TypeScript
+- Tailwind CSS, Framer Motion, Recharts
+- Three.js, React Three Fiber, and Drei for rooftop visualization
+- Vercel-compatible deployment
+
+Server/API
+- Next.js Route Handlers under app/api
+- HMAC-signed HTTP-only session cookie authentication
+- Gemini API integration for optional AI-assisted features
+- Typed request validation, structured AI-output validation, upload limits, and in-memory rate limiting
+
+Calculation layer
+- Deterministic TypeScript solar feasibility and financial models
+- 25-year investment and degradation projections
+- Static subsidy assumptions that must be verified against current MNRE/DISCOM rules
+
+Important limitations before public paid launch
+- No FastAPI, PostgreSQL, SQLAlchemy, Alembic, Supabase, Render, or JWT service is currently wired into the runnable app.
+- There is no durable multi-user account/project store.
+- There is no payment provider, subscription entitlement, or installer marketplace integration.
+- In-memory rate limits are appropriate only for a single-instance private beta.
+- Rooftop video analysis is a preliminary estimate based on an extracted frame, not an engineering survey.
+
+Required production secrets
+- GEMINI_API_KEY
+- ZENITH_AUTH_EMAIL
+- ZENITH_AUTH_PASSWORD
+- ZENITH_SESSION_SECRET (at least 32 random characters)

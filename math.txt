@@ -1,0 +1,162 @@
+ZENITH — SERVICE 1
+SOLAR FEASIBILITY & BENEFIT ANALYSIS (FINAL MATH — REALISTIC)
+
+--------------------------------------------------
+INPUTS
+--------------------------------------------------
+- Monthly electricity consumption (kWh/month)
+- Monthly electricity bill (₹/month)
+- Location-based Feasibility Score (FS), where FS ∈ [1, 10]
+
+--------------------------------------------------
+ASSUMPTIONS
+--------------------------------------------------
+- 1 month ≈ 30 days
+- Under ideal conditions (FS = 10), 1 kW solar generates ≈ 4 kWh/day
+- Real-world system losses ≈ 20% (inverter, wiring, dust, heat)
+- Standard solar panel size = 550 W = 0.55 kW
+- Installation cost ≈ ₹60,000 per kW
+- Solar panel lifetime = 25 years
+- Net metering enabled
+- Realistic solar offset factor = 80% (OFFSET = 0.8)
+- Subsidies assumed 0 for MVP (can be added later)
+
+--------------------------------------------------
+STEP 1: DAILY ENERGY REQUIREMENT
+--------------------------------------------------
+Convert monthly usage to daily usage:
+
+E_daily (kWh/day) =
+Monthly_kWh / 30
+
+--------------------------------------------------
+STEP 2: FEASIBILITY SCORE EFFICIENCY
+--------------------------------------------------
+Convert FS to efficiency factor:
+
+Efficiency =
+FS / 10
+
+--------------------------------------------------
+STEP 3: RAW SYSTEM SIZE (IDEAL CONDITIONS)
+--------------------------------------------------
+Energy produced per kW per day:
+
+Production_per_kW =
+4 × Efficiency
+
+Required system size (ideal):
+
+S_kW_raw =
+E_daily / Production_per_kW
+
+--------------------------------------------------
+STEP 4: REAL-WORLD PERFORMANCE BUFFER
+--------------------------------------------------
+Account for real-world system losses (~20%):
+
+S_kW_buffered =
+S_kW_raw × 1.2
+
+(This ensures the system meets demand in real conditions)
+
+--------------------------------------------------
+STEP 5: NUMBER OF SOLAR PANELS
+--------------------------------------------------
+Panel capacity:
+
+Panel_size =
+0.55 kW
+
+Number of panels (rounded up):
+
+N_panels =
+ceil(S_kW_buffered / 0.55)
+
+--------------------------------------------------
+STEP 6: ACTUAL INSTALLED CAPACITY
+--------------------------------------------------
+Installers install whole panels only:
+
+S_actual (kW) =
+N_panels × 0.55
+
+(This is the actual system capacity used for cost and ROI)
+
+--------------------------------------------------
+STEP 7: TOTAL INSTALLATION COST
+--------------------------------------------------
+Cost per kW:
+
+Cost_per_kW =
+₹60,000
+
+Total project cost:
+
+Cost_total (₹) =
+S_actual × 60,000
+
+--------------------------------------------------
+STEP 8: ANNUAL SAVINGS (REALISTIC)
+--------------------------------------------------
+Solar does not offset 100% of the bill due to:
+- nighttime usage
+- seasonal mismatch
+- grid export limits
+- consumption patterns
+
+Assume realistic offset factor:
+
+OFFSET =
+0.8
+
+Annual savings:
+
+Savings_annual (₹/year) =
+Monthly_Bill × 12 × OFFSET
+
+--------------------------------------------------
+STEP 9: PAYBACK PERIOD
+--------------------------------------------------
+Years required to recover installation cost:
+
+Payback_years =
+Cost_total / Savings_annual
+
+--------------------------------------------------
+STEP 10: LIFETIME PROFIT (25 YEARS)
+--------------------------------------------------
+Total savings over system lifetime:
+
+Savings_lifetime =
+Savings_annual × 25
+
+Lifetime profit:
+
+Profit_lifetime (₹) =
+Savings_lifetime − Cost_total
+
+--------------------------------------------------
+IMPORTANT NOTES (USER-FACING EXPLANATION)
+--------------------------------------------------
+- Solar systems typically offset 70–90% of household electricity costs.
+  Zenith uses an 80% offset to reflect realistic usage patterns.
+
+- Excess solar energy generated during high-sunlight months is exported
+  to the grid and adjusted against consumption during low-sunlight periods
+  under net metering.
+
+- Savings are calculated using current electricity tariffs.
+  Actual savings may increase over time as grid electricity prices rise.
+
+--------------------------------------------------
+OUTPUTS SHOWN TO USER
+--------------------------------------------------
+- Feasibility Score (FS)
+- Recommended system size (kW)
+- Number of solar panels
+- Installation cost (₹)
+- Annual savings (₹/year)
+- Payback period (years)
+- 25-year lifetime profit (₹)
+- AI-generated explanation (Gemini)
