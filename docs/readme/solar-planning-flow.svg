@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 390" role="img" aria-labelledby="title desc">
+  <title id="title">Zenith rooftop solar planning flow</title>
+  <desc id="desc">Household and roof inputs feed a solar feasibility estimate, then users compare subsidy and investment assumptions. Rooftop analysis is preliminary.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102734"/>
+      <stop offset="1" stop-color="#0b1822"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8af2df"/>
+      <stop offset="1" stop-color="#42bdb5"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0 0 9 4.5 0 9Z" fill="#61d6c4"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="390" rx="24" fill="#07131c"/>
+  <text x="42" y="48" fill="#83e7d6" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2.3">ZENITH / ROOFTOP SOLAR DECISION FLOW</text>
+  <text x="42" y="78" fill="#e7f1f2" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">From a household scenario to an estimate you can inspect</text>
+
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect x="40" y="108" width="334" height="214" rx="18" fill="url(#panel)" stroke="#244450"/>
+    <text x="64" y="141" fill="#83e7d6" font-size="12" font-weight="700" letter-spacing="1.4">01 / INPUTS</text>
+    <path d="M68 214 113 175l45 39v51h-90z" fill="none" stroke="#87ead9" stroke-width="3" stroke-linejoin="round"/>
+    <path d="m81 205 32-27 31 27" fill="none" stroke="#87ead9" stroke-width="3" stroke-linecap="round"/>
+    <path d="M94 205h35l-5 17H99z" fill="#17475a" stroke="#55c8c4" stroke-width="2"/>
+    <path d="M101 206 99 221m13-15-2 15m12-15-2 15M97 213h29" stroke="#65d9cf" stroke-width="1.2"/>
+    <text x="180" y="197" fill="#eff7f6" font-size="18" font-weight="600">Set the scenario</text>
+    <text x="180" y="224" fill="#a9bec4" font-size="14">Bill and roof details</text>
+    <text x="180" y="247" fill="#a9bec4" font-size="14">plus the choices to compare</text>
+    <circle cx="338" cy="132" r="4" fill="#5ed4c4"/>
+
+    <path d="M389 215h34" fill="none" stroke="#61d6c4" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="433" y="108" width="334" height="214" rx="18" fill="url(#panel)" stroke="#244450"/>
+    <text x="457" y="141" fill="#83e7d6" font-size="12" font-weight="700" letter-spacing="1.4">02 / FEASIBILITY</text>
+    <circle cx="501" cy="211" r="27" fill="none" stroke="url(#sun)" stroke-width="3"/>
+    <path d="M501 169v-10m0 104v-10m42-42h10m-104 0h10m72-30 8-8m-74 74 8-8m0-58-8-8m74 74-8-8" stroke="#71dfd1" stroke-width="3" stroke-linecap="round"/>
+    <path d="M470 255h62l-7 23h-48z" fill="#17475a" stroke="#55c8c4" stroke-width="2"/>
+    <path d="m486 257-4 19m19-19-2 19m19-19-2 19m-43-11h53" stroke="#65d9cf" stroke-width="1.2"/>
+    <text x="556" y="197" fill="#eff7f6" font-size="18" font-weight="600">Estimate solar fit</text>
+    <text x="556" y="224" fill="#a9bec4" font-size="14">Deterministic generation,</text>
+    <text x="556" y="247" fill="#a9bec4" font-size="14">cost and payback estimates</text>
+    <circle cx="731" cy="132" r="4" fill="#5ed4c4"/>
+
+    <path d="M782 215h34" fill="none" stroke="#61d6c4" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="826" y="108" width="334" height="214" rx="18" fill="url(#panel)" stroke="#244450"/>
+    <text x="850" y="141" fill="#83e7d6" font-size="12" font-weight="700" letter-spacing="1.4">03 / COMPARISON</text>
+    <path d="M864 269v-54h15v54m10 0v-78h15v78m10 0v-98h15v98" fill="#164456" stroke="#62d8c8" stroke-width="2"/>
+    <path d="M858 278h70" stroke="#49717b" stroke-width="2"/>
+    <path d="M864 197h12m12-10h12m12-10h12" stroke="#f2c773" stroke-width="3" stroke-linecap="round"/>
+    <text x="957" y="197" fill="#eff7f6" font-size="18" font-weight="600">Compare outcomes</text>
+    <text x="957" y="224" fill="#a9bec4" font-size="14">Subsidy and investment</text>
+    <text x="957" y="247" fill="#a9bec4" font-size="14">assumptions stay visible</text>
+    <circle cx="1124" cy="132" r="4" fill="#f2c773"/>
+  </g>
+
+  <path d="M42 349h12" stroke="#f2c773" stroke-width="3" stroke-linecap="round"/>
+  <text x="64" y="354" fill="#b8c9cd" font-family="Segoe UI, Arial, sans-serif" font-size="13">Policy values are static assumptions in the current build; rooftop analysis is a preliminary estimate.</text>
+</svg>
