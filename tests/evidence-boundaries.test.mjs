@@ -1,3 +1,4 @@
+// Security regression contract for browser-visible configuration and demo access.
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
