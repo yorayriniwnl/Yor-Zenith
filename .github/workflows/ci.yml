@@ -24,6 +24,10 @@ jobs:
       - name: Install dependencies
         working-directory: zenith-app
         run: npm ci
+      - name: Production dependency audit
+        working-directory: zenith-app
+        run: npm audit --omit=dev --audit-level=high
+
       - name: Evidence boundary tests
         run: node --test tests/*.test.mjs
       - name: Design token contract
