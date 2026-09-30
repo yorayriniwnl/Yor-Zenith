@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: zenith-app/package-lock.json
+      - name: Install dependencies
+        working-directory: zenith-app
+        run: npm ci
+      - name: Production dependency audit
+        working-directory: zenith-app
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Evidence boundary tests
+        run: node --test tests/*.test.mjs
+      - name: Design token contract
+        working-directory: zenith-app
+        run: npm run design:check
+      - name: Lint
+        working-directory: zenith-app
+        run: npm run lint
+      - name: Production build
+        working-directory: zenith-app
+        env:
+          NEXT_PUBLIC_SITE_URL: https://example.invalid
+        run: npm run build

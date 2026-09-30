@@ -168,7 +168,7 @@ function TinyStory() {
           A day in the life
         </p>
         <p className="text-sm text-gray-400 leading-relaxed">
-          At <span className="text-white font-medium">7:14 AM</span>, House A's solar panels hit peak output.
+          At <span className="text-white font-medium">7:14 AM</span>, House A&apos;s solar panels hit peak output.
           Lumen Logic instantly routes <span className="text-emerald-400 font-medium">3.5 kWh</span> to House B and{" "}
           <span className="text-emerald-400 font-medium">2.1 kWh</span> to House C — before the grid even blinks.
           By noon, the microgrid has settled{" "}
