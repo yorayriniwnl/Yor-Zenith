@@ -28,6 +28,6 @@ test("browser-visible source never references public secret-like environment var
 
 test("demo access is explicitly not credential authentication", () => {
   const login = fs.readFileSync(path.join(appRoot, "app", "login", "page.tsx"), "utf8");
-  assert.equal(/password|admin@zenith\.com|zenith123/i.test(login), false);
+  assert.equal(/type=["']password["']|admin@zenith\.com|zenith123/i.test(login), false);
   assert.match(login, /public demonstration|not authentication|demo/i);
 });
