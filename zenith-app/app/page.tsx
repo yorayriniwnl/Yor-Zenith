@@ -101,7 +101,7 @@ export default function WelcomePage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
 
   const navigateProtected = (path: string) => {
-    const hasDemoAccess = window.localStorage.getItem("hasDemoAccess") === "true"
+    const hasDemoAccess = window.localStorage.getItem("demoAccess") === "true"
     if (hasDemoAccess) {
       router.push(path)
       return
