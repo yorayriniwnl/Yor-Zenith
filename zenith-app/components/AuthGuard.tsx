@@ -11,8 +11,8 @@ export default function AuthGuard({
   const router = useRouter();
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (!isLoggedIn) {
+    const hasDemoAccess = localStorage.getItem("hasDemoAccess");
+    if (!hasDemoAccess) {
       router.replace("/login");
     }
   }, [router]);
