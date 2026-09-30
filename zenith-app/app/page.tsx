@@ -82,7 +82,7 @@ const FAQS = [
   },
   {
     question: "Can I start without an account?",
-    answer: "The landing surface is open for inspection. Protected analysis routes send you through the existing login flow and preserve the route you intended to open.",
+    answer: "The landing surface is open for inspection. Protected analysis routes send you through the explicit demo-access gate and preserve the route you intended to open.",
   },
 ]
 
@@ -101,12 +101,12 @@ export default function WelcomePage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
 
   const navigateProtected = (path: string) => {
-    const isLoggedIn = window.localStorage.getItem("isLoggedIn") === "true"
-    if (isLoggedIn) {
+    const hasDemoAccess = window.localStorage.getItem("hasDemoAccess") === "true"
+    if (hasDemoAccess) {
       router.push(path)
       return
     }
-    window.localStorage.setItem("redirectAfterLogin", path)
+    window.localStorage.setItem("redirectAfterDemoAccess", path)
     router.push("/login")
   }
 
