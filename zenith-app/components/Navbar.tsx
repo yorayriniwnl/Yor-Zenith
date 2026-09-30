@@ -19,10 +19,10 @@ export default function Navbar() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const [hasDemoAccess, setIsLoggedIn] = useState(() => typeof window !== "undefined" && localStorage.getItem("hasDemoAccess") === "true")
+  const [hasDemoAccess, setHasDemoAccess] = useState(() => typeof window !== "undefined" && localStorage.getItem("demoAccess") === "true")
 
   const syncDemoAccessState = useCallback(() => {
-    setIsLoggedIn(localStorage.getItem("hasDemoAccess") === "true")
+    setHasDemoAccess(localStorage.getItem("demoAccess") === "true")
   }, [])
 
   useEffect(() => {
@@ -42,9 +42,9 @@ export default function Navbar() {
   }, [syncDemoAccessState])
 
   const handleExitDemo = () => {
-    localStorage.removeItem("hasDemoAccess")
+    localStorage.removeItem("demoAccess")
     localStorage.removeItem("redirectAfterDemoAccess")
-    setIsLoggedIn(false)
+    setHasDemoAccess(false)
     window.dispatchEvent(new Event("demo-access-changed"))
     router.push("/")
   }
