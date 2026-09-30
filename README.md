@@ -50,13 +50,7 @@ npm run build --prefix zenith-app
 npm run start --prefix zenith-app
 ```
 
-Open `http://localhost:3000` (or the port printed by Next.js). The local demo account is:
-
-```text
-admin@zenith.com / zenith123
-```
-
-This credential is only for the local demo flow. It is not a production authentication system.
+Open `http://localhost:3000` (or the port printed by Next.js). Analysis routes use an explicit browser-local **demo access gate**. It does not create an account, authenticate a user, or protect privileged data.
 
 ## Visual system
 
@@ -69,7 +63,7 @@ design/                  YOR token contract and checks
 assets/                  code-authored hero and architecture visuals
 zenith-app/app/          Next.js routes and API handlers
 zenith-app/components/   shared navigation and module components
-zenith-app/lib/          solar, rooftop, Gemini, and Lumen logic
+zenith-app/lib/          solar, rooftop, and Lumen logic
 ```
 
 ## Contributors
