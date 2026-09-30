@@ -19,10 +19,10 @@ export default function Navbar() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(() => typeof window !== "undefined" && localStorage.getItem("isLoggedIn") === "true")
+  const [hasDemoAccess, setIsLoggedIn] = useState(() => typeof window !== "undefined" && localStorage.getItem("hasDemoAccess") === "true")
 
-  const syncLoginState = useCallback(() => {
-    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true")
+  const syncDemoAccessState = useCallback(() => {
+    setIsLoggedIn(localStorage.getItem("hasDemoAccess") === "true")
   }, [])
 
   useEffect(() => {
@@ -32,20 +32,20 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    const handleStorageChange = () => syncLoginState()
+    const handleStorageChange = () => syncDemoAccessState()
     window.addEventListener("storage", handleStorageChange)
-    window.addEventListener("auth-changed", handleStorageChange)
+    window.addEventListener("demo-access-changed", handleStorageChange)
     return () => {
       window.removeEventListener("storage", handleStorageChange)
-      window.removeEventListener("auth-changed", handleStorageChange)
+      window.removeEventListener("demo-access-changed", handleStorageChange)
     }
-  }, [syncLoginState])
+  }, [syncDemoAccessState])
 
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn")
-    localStorage.removeItem("redirectAfterLogin")
+  const handleExitDemo = () => {
+    localStorage.removeItem("hasDemoAccess")
+    localStorage.removeItem("redirectAfterDemoAccess")
     setIsLoggedIn(false)
-    window.dispatchEvent(new Event("auth-changed"))
+    window.dispatchEvent(new Event("demo-access-changed"))
     router.push("/")
   }
 
@@ -79,12 +79,12 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-3 sm:flex">
           <span className="yor-state yor-state--hot">BETA / INDIA</span>
-          {!isLoggedIn ? (
+          {!hasDemoAccess ? (
             <button onClick={() => router.push("/login")} className="yor-button yor-button--quiet px-4 py-2">
-              Sign in <ArrowUpRight size={14} />
+              Enter demo <ArrowUpRight size={14} />
             </button>
           ) : (
-            <button onClick={handleLogout} className="yor-button yor-button--quiet px-4 py-2">Log out</button>
+            <button onClick={handleExitDemo} className="yor-button yor-button--quiet px-4 py-2">Exit demo</button>
           )}
         </div>
 
@@ -103,10 +103,10 @@ export default function Navbar() {
             ))}
           </div>
           <div className="mt-3 border-t border-white/10 pt-3 sm:hidden">
-            {!isLoggedIn ? (
-              <button onClick={() => { setIsOpen(false); router.push("/login") }} className="yor-button yor-button--primary w-full">Sign in <ArrowUpRight size={14} /></button>
+            {!hasDemoAccess ? (
+              <button onClick={() => { setIsOpen(false); router.push("/login") }} className="yor-button yor-button--primary w-full">Enter demo <ArrowUpRight size={14} /></button>
             ) : (
-              <button onClick={handleLogout} className="yor-button yor-button--quiet w-full">Log out</button>
+              <button onClick={handleExitDemo} className="yor-button yor-button--quiet w-full">Exit demo</button>
             )}
           </div>
         </div>
