@@ -23176,7 +23176,7 @@ class FaultDetector {
     time:     number,
   ): GridFault[] {
     const faults: GridFault[] = []
-    let faultId = `F_${Math.floor(time)}_`
+    const faultId = `F_${Math.floor(time)}_`
 
     // ── Overvoltage / undervoltage faults ────────────────────────────────────
     for (const nd of network.getAllNodes()) {
@@ -23743,8 +23743,8 @@ function useGridPhysicsEngine(opts: {
   // Update generation/load on network nodes each tick
   const updateNetworkLoads = useCallback((simTime: number) => {
     const loadFactor = getLoadProfileFactor(hour)
-    let totalSolarMW = solarOutputMW
-    let totalLoadMW  = cityLoadMW * loadFactor
+    const totalSolarMW = solarOutputMW
+    const totalLoadMW  = cityLoadMW * loadFactor
 
     // Distribute solar to PV buses proportionally
     const pvNodes = network.getAllNodes().filter((n) => n.type === "pv_bus" || n.type === "prosumer")
