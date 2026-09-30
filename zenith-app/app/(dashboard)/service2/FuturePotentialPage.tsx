@@ -391,7 +391,7 @@ const [isAiLoading, setIsAiLoading] = useState(false);
       corpTaxRate: dcorpTaxRate, enableAD: denableAD
     } = debouncedInputs as any;
 
-    let data: ChartData[] = [];
+    const data: ChartData[] = [];
 
     // capex
     const solarCapex = dkW * dcapexPerKW;
