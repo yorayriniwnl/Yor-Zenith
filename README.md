@@ -1,10 +1,18 @@
+<!-- YOR REDLINE / README COVER V1 -->
+<div align="center">
+
+![Yor-Zenith | YOR REDLINE](docs/yor-redline-cover.svg)
+
+<sub><strong>YOR / PROJECT DOSSIER</strong> · <a href="https://github.com/yorayriniwnl">GitHub</a> · <a href="https://yorayriniwnl.in">Portfolio</a></sub>
+
+</div>
+<!-- END YOR REDLINE -->
+
 # Zenith // Solar Decision Intelligence
 
 **Status: DEMO / EXPERIMENTAL**
 
 Zenith is an India-focused rooftop-solar decision surface. It turns a monthly bill, a roof context, and a policy assumption into a workflow that can be inspected before an installation decision is made.
-
-![Zenith signal console](assets/hero.svg)
 
 ## What is in the repository
 
