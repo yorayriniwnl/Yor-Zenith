@@ -14,6 +14,23 @@
 
 Zenith is an India-focused rooftop-solar decision surface. It turns a monthly bill, a roof context, and a policy assumption into a workflow that can be inspected before an installation decision is made.
 
+<!-- YOR REDLINE / EXPERIENCE V2 -->
+
+<a id="system-map"></a>
+## System map
+
+<div align="center"><picture><source media="(max-width: 600px)" srcset="docs/yor-redline-system-mobile.svg"/><img src="docs/yor-redline-system.svg" width="100%" alt="Solar decision workflow: Bill and roof inputs → Scenario exploration → Energy simulation → Cost and payback view"/></picture></div>
+
+| Project signal | Documented scope |
+| :--- | :--- |
+| **Current maturity** | DEMO / EXPERIMENTAL |
+| **Technical focus** | Rooftop scenarios, energy-output modeling, finance assumptions, and payback analysis. |
+| **Evidence boundary** | Scenario analysis is a decision-support demo, not a certified solar-installation estimate. |
+
+**Navigate:** [What is in the repository](#what-is-in-the-repository) · [Evidence boundary](#evidence-boundary) · [Local verification](#local-verification) · [Visual system](#visual-system) · [Project structure](#project-structure) · [Contributors](#contributors)
+
+<!-- END YOR REDLINE / EXPERIENCE V2 -->
+
 ## What is in the repository
 
 The product is organized around five decision modules:
