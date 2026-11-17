@@ -57,22 +57,22 @@ const BENTO_FEATURES = [
 
 const TESTIMONIALS = [
   {
-    name: "Manya Tiwari Roy",
+    name: "Anya",
     role: "Homeowner, Bengaluru",
     text: "The idea behind Zenith is a game-changer. Providing homeowners with a deterministic ROI and a transparent look at the solar process is exactly what’s missing in the market right now."
   },
   {
-    name: "Akshat Roy",
+    name: "Akshat",
     role: "Renewable Energy Consultant",
     text: "The automated system sizing approach solves the biggest bottleneck in residential solar—the site survey. This reduces time-to-deploy significantly."
   },
   {
-    name: "Neelam Kumari",
+    name: "Neelam",
     role: "EPC Manager, Patna",
     text: "Zenith bridges the trust gap. Auto subsidy and tariff analysis makes solar accessible and understandable for everyone."
   },
   {
-    name: "Jaisheel Kumar",
+    name: "Jaisheel",
     role: "Installer Partner, Delhi",
     text: "Connecting vetted installers with homeowners who already have high-accuracy feasibility reports creates a seamless ecosystem."
   }
